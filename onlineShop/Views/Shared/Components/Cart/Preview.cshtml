@@ -1,0 +1,44 @@
+﻿@model Cart
+
+
+@{ if (Model.Items.Count == 0)
+    {
+        <span>Your cart is empty.</span>
+    }
+    else
+    {
+        <div>
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th class="minw-200">Product</th>
+                        <th>Quantity</th>
+                        <th>Amount</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td><a href="@Url.Action("Display", "Product", new { id = item.Product.Id })">@item.Product.Name.SetLengthLimit(40)</a></td>
+                            <td>@item.Quantity</td>
+                            <td>@item.Amount</td>
+                            <td>
+                                <button class="btn btn-outline-danger btn-sm" id="remove-from-cart" data-product-id="@item.Product.Id">Remove</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <hr />
+
+        <span class="float-left mb-1"><a href="@Url.Action("Index","Cart")" class="btn btn-success btn-sm">Go To Cart</a></span>
+        <span class="float-right">Subtotal: <span class="fw600">@Model.CartAmount</span></span>
+    }
+}
+
+
+
+

@@ -1,0 +1,197 @@
+﻿@model Order
+
+<span style="font-size:18px; display:block; margin-bottom: 10px;">Hello,</span>
+
+@if (TempData["StatusUpdate"] != null)
+{
+    <span>The status of your order has been updated.</span>
+    <span>Please refer to order summary below.</span>
+}
+else
+{
+    <span>Thank you for your order!</span>
+    <span>Please find below your order confirmation.</span>
+}
+
+<br />
+<br />
+
+<table width="100%">
+    <tbody>
+        <tr>
+            <td width="50%">Order ID</td>
+            <td>@Model.Id</td>
+        </tr>
+        <tr>
+            <td width="50%">Created On</td>
+            <td>@Model.CreatedOn</td>
+        </tr>
+        <tr>
+            <td width="50%">Current Status</td>
+            <td>@HtmlExtensions.EnumDisplayNameFor(Model.Status)</td>
+        </tr>
+    </tbody>
+</table>
+
+<br />
+
+<span style="font-size:18px; display:block; margin-bottom: 10px;">Items</span>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding:0;margin:0;width:100%;">
+
+    <thead>
+        <tr>
+            <th width="35%" style="text-align:left">Product</th>
+            <th style="text-align:left">Price</th>
+            <th style="text-align:left">Quantity</th>
+            <th style="text-align:left">Amount</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("Display", "Product", new { id = item.Product.Id }, Context.Request.Scheme)">@item.Product.Name.SetLengthLimit(50)</a>
+                </td>
+                <td>
+                    @item.Product.SalePrice
+                </td>
+                <td>
+                    @item.Quantity
+                </td>
+                <td>
+                    @item.Amount
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<br />
+
+<table width="100%">
+    <tbody>
+        <tr>
+            <td width="50%">Subtotal</td>
+            <td>@Model.OrderAmount PLN</td>
+        </tr>
+        <tr>
+            <td width="50%">Delivery Fee</td>
+            <td>@Model.DeliveryFee PLN</td>
+        </tr>
+        <tr>
+            <td width="50%">Total</td>
+            <td>@Model.OrderAmountTotal PLN</td>
+        </tr>
+    </tbody>
+</table>
+
+<br />
+
+<span style="font-size:18px; display:block; margin-bottom: 10px;">Delivery Details</span>
+
+<table width="100%">
+    <tbody>
+
+        <tr>
+            <td width="30%"><b>Delivery Method</b></td>
+            <td>@HtmlExtensions.EnumDisplayNameFor(Model.DeliveryDetails.DeliveryMethodType)</td>
+        </tr>
+
+        @if (Model.HasNoAccount)
+        {
+            <tr>
+                <td width="30%"><b>Email</b></td>
+                <td>@Model.DeliveryDetails.EmailAddress</td>
+            </tr>
+        }
+        <tr>
+            <td width="30%"><b>Firstname</b></td>
+            <td>@Model.DeliveryDetails.Firstname</td>
+        </tr>
+        <tr>
+            <td width="30%"><b>Lastname</b></td>
+            <td>@Model.DeliveryDetails.Lastname</td>
+        </tr>
+        <tr>
+            <td width="30%"><b>Phone Number</b></td>
+            <td>@Model.DeliveryDetails.PhoneNumber</td>
+        </tr>
+
+        @if (Model.DeliveryDetails.DeliveryMethodType == DeliveryMethodType.Courier)
+        {
+            <tr>
+                <td width="30%"><b>Street</b></td>
+                <td>@Model.DeliveryDetails.CourierData.Street</td>
+            </tr>
+            <tr>
+                <td width="30%"><b>Building</b></td>
+                <td>@Model.DeliveryDetails.CourierData.Building</td>
+            </tr>
+            <tr>
+                <td width="30%"><b>Appartment</b></td>
+                <td>@Model.DeliveryDetails.CourierData.Appartment</td>
+            </tr>
+            <tr>
+                <td width="30%"><b>Postal Code</b></td>
+                <td>@Model.DeliveryDetails.CourierData.PostalCode</td>
+            </tr>
+            <tr>
+                <td width="30%"><b>City</b></td>
+                <td>@Model.DeliveryDetails.CourierData.City</td>
+            </tr>
+            <tr>
+                <td width="30%"><b>Country</b></td>
+                <td>@Model.DeliveryDetails.CourierData.Country</td>
+            </tr>
+        }
+
+        @if (Model.DeliveryDetails.DeliveryMethodType == DeliveryMethodType.Store)
+        {
+            <tr>
+                <td width="30%"><b>Store Code</b></td>
+                <td>@Model.DeliveryDetails.StoreData.StoreCode</td>
+            </tr>
+        }
+
+        @if (Model.DeliveryDetails.DeliveryMethodType == DeliveryMethodType.Locker)
+        {
+            <tr>
+                <td width="30%"><b>Parcel Locker Code</b></td>
+                <td>@Model.DeliveryDetails.LockerData.LockerCode</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<br />
+
+<span style="font-size:18px; display:block; margin-bottom: 10px;">Payment Details</span>
+
+<table width="100%">
+    <tbody>
+        <tr>
+            <td width="30%"><b>Payment Method</b></td>
+            <td>@HtmlExtensions.EnumDisplayNameFor(Model.PaymentMethod)</td>
+        </tr>
+    </tbody>
+</table>
+
+<br />
+
+<span style="font-size:18px; display:block; margin-bottom: 10px;">Additional Information</span>
+
+@{ var commentText = String.IsNullOrEmpty(Model.DeliveryDetails.Comment) ? "—" : Model.DeliveryDetails.Comment; }
+
+<table width="100%">
+    <tbody>
+        <tr>
+            <td width="30%"><b>Comment</b></td>
+            <td>@commentText</td>
+        </tr>
+    </tbody>
+</table>

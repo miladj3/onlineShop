@@ -1,0 +1,10 @@
+﻿@model OrderDTO
+
+<div class="flex-preset-4"><span class="text-secondary pl-3">Order ID</span><span>@Model.Id</span></div>
+<div class="flex-preset-4"><span class="text-secondary pl-3">Created On</span><span>@Model.CreatedOn.ToLocalTime()</span></div>
+<div class="flex-preset-4"><span class="text-secondary pl-3">Status</span><span>@Model.Status</span></div>
+
+@if (!String.IsNullOrEmpty(Model.CompletedOn.ToString()))
+{
+    <div class="flex-preset-4"><span class="text-secondary pl-3">Completed On</span><span>@Model.CompletedOn.TryToLocalDateTime()</span></div>
+}

@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Shopping Cart";
+}
+
+<div class="container-fluid container-light bg-white mb-3">
+    <h4>Your shopping cart:</h4>
+</div>
+
+<div id="cart-full-area" class="container-fluid container-light bg-white mb-2">
+    @await Component.InvokeAsync("Cart", new { mode = CartDisplayMode.Full })
+</div>
+
+@section Scripts{
+    <script src="~/js/cart/cart-full.js"></script>
+}

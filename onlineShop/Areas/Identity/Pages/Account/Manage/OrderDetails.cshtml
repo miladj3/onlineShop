@@ -1,0 +1,34 @@
+﻿@page
+@model OrderDetailsModel
+@{
+    ViewData["Title"] = "Order Details";
+}
+
+<div class="mb-3">
+    <h5>Order Info</h5>
+    @Html.DisplayFor(x=>x.OrderDTO, "~/Views/Order/DisplayTemplates/OrderInfo.cshtml")
+</div>
+
+<div class="mb-3">
+    <h5>Items</h5>
+    @Html.DisplayFor(x => x.OrderDTO, "~/Views/Order/DisplayTemplates/OrderItems.cshtml")
+    <div class="mb-3"></div>
+    @Html.DisplayFor(x => x.OrderDTO, "~/Views/Order/DisplayTemplates/OrderTotals.cshtml")
+</div>
+
+<div class="mb-3">
+    <h5>Delivery Details</h5>
+    @Html.DisplayFor(x => x.OrderDTO, "~/Views/Order/DisplayTemplates/OrderDeliveryDetails.cshtml")
+</div>
+
+<div class="mb-3">
+    <h5>Payment Details</h5>
+    @Html.DisplayFor(x => x.OrderDTO, "~/Views/Order/DisplayTemplates/OrderPaymentDetails.cshtml")
+</div>
+
+<div class="mb-3">
+    <h5>Additional Info</h5>
+    @Html.DisplayFor(x => x.OrderDTO, "~/Views/Order/DisplayTemplates/OrderComment.cshtml")
+</div>
+
+

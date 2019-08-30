@@ -1,0 +1,50 @@
+﻿
+@{ ViewData["Title"] = "New Order"; }
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <div class="container-light">
+
+            <h4 class="text-center mg-b-1em">How do you want to proceed?</h4>
+
+            <div class="order-account-options">
+
+                <div class="flex-preset-3 flex-wrap">
+
+                    <a class="order-account-option link-block nodecor" asp-area="Identity" asp-page="/Account/Register" asp-route-returnUrl="@Url.Action("Checkout", "Order")">
+                        <div>
+                            <i class="fa fa-user" style="font-size: 4rem;"></i>
+                        </div>
+
+                        <div>
+                            <h5 class="text-center">Create New Account</h5>
+                        </div>
+                    </a>
+
+                    <a asp-controller="Order" asp-action="Checkout" class="order-account-option link-block nodecor">
+                        <div>
+                            <i class="fa fa-user-secret" style="font-size: 4rem;"></i>
+                        </div>
+
+                        <div>
+                            <h5 class="text-center">Order Without Registration</h5>
+                        </div>
+                    </a>
+
+                    <a class="order-account-option link-block nodecor" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Url.Action("Checkout", "Order")">
+                        <div>
+                            <i class="fa fa-sign-in" style="font-size: 4rem;"></i>
+                        </div>
+
+                        <div>
+                            <h5 class="text-center">Log In Existing Account</h5>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

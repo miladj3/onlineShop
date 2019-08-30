@@ -1,0 +1,84 @@
+﻿@model DepartmentViewModel
+
+@{ ViewData["Title"] = Model.Name; }
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css" />
+<link rel="stylesheet" href="~/res/toastr/toastr.css" />
+
+<div class="container-light-thin">@Html.BreadcrumbNavRender()</div>
+
+<div class="container-fluid container-light bg-white mb-3">
+
+    <h4>Categories in '@Model.Name' (@Model.Categories.Count):</h4>
+
+    <table class="table table-condensed entity-datatable" id="entityDatatable">
+        <thead class="text-center">
+            <tr>
+                <th class="text-center d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">Id</th>
+                <th class="text-center">Name</th>
+                <th class="text-center d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">Description</th>
+                <th class="text-center d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">Picture</th>
+                <th class="text-center">Subcategories</th>
+                <th class="text-center">Controls</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var cat in Model.Categories)
+            {
+                <tr>
+                    <td class="text-center d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">@cat.Id</td>
+
+                    <td class="text-center"><a asp-action="AdminView" asp-controller="Category" asp-route-id="@cat.Id" class="link-alt">@cat.Name</a></td>
+
+                    <td class="text-center d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">@cat.Description</td>
+
+                    <td class="text-center d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">
+                        @if (cat.Picture == null)
+                        {
+                            <span class="text-secondary text-sm-center">No Picture Set</span>
+                        }
+                        else
+                        {
+                            <img src="@(Url.Content("~/") + cat.Picture.Path)" style="max-width:75px;max-height:75px;" />
+                        }
+                    </td>
+
+                    <td class="text-center">@cat.Subcategories.Count</td>
+
+                    <td class="text-center">
+                        <a asp-action="Edit" asp-controller="Category" asp-route-id="@cat.Id" class="text-warning">Edit</a><span class="text-secondary"> | </span>
+                        <a href="javascript:;" class="ctrl-item-delete text-danger" data-itemId="@cat.Id" data-itemName="@cat.Name" data-itemType="category">Delete</a><span class="text-secondary"> | </span>
+                        <a asp-action="Display" asp-controller="Category" asp-route-id="@cat.Id" class="text-success" target="_blank"><i class="fa fa-eye"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+    <div class="mt-2">
+        <a asp-action="Edit" asp-controller="Department" asp-route-id="@Model.Id" class="btn btn-outline-warning mr-2 mb-2">Edit Department</a>
+        <a asp-action="Create" asp-controller="Category" asp-route-departmentId="@Model.Id" class="btn btn-outline-success mr-2 mb-2">Create Category</a>
+    </div>
+
+</div>
+
+@* Delete confirmation modal *@
+@await Html.PartialAsync("_EntityDeleteConfirmationDialog")
+
+@section Scripts {
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.js"></script>
+    <script src="~/res/toastr/toastr.min.js"></script>
+    <script src="~/js/toastr-custom-settings.js"></script>
+    <script src="~/js/cpanel-entity-datatables.js"></script>
+    <script src="~/js/cpanel-entity-delete-modal.js"></script>
+
+    <script>
+        InitTableForEntity("Categories");
+        InitItemDelete("Categories");
+    </script>
+}
+
+

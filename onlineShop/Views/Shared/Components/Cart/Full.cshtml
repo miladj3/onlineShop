@@ -1,0 +1,86 @@
+﻿@model Cart
+
+
+@{ if (Model.Items.Count == 0)
+    {
+        <div>
+            <div class="mb-5">Your haven't added any items yet.</div>
+
+            <a href="@Url.Action("Index", "Home")" class="btn btn-warning btn-sm">Return to Catalog</a>
+        </div>
+    }
+    else
+    {
+
+        <div class="container-fluid mt-1">
+
+            <div class="table-row wrapper header">
+                <div class="wrapper flex-grow-1">
+                    <div class="wrapper flex-grow-1">
+                        <div class="table-cell-text">Product</div>
+
+                        <div class="table-cell-text">Quantity</div>
+                        <div class="table-cell-text">Amount</div>
+                        <div class="table-cell-text"></div>
+                    </div>
+                </div>
+            </div>
+
+
+            @foreach (var item in Model.Items)
+            {
+                <div class="table-row wrapper">
+                    <div class="wrapper flex-grow-1">
+
+                        <div class="wrapper flex-grow-1">
+                            <div class="table-cell-text"><a href="@Url.Action("Display", "Product", new { id = item.Product.Id })">@item.Product.Name.SetLengthLimit(50)</a></div>
+
+                            <div class="table-cell-text">
+
+                                <div class="input-group flex-nowrap w-auto">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-primary btn-group" id="item-quantity-control" data-action="reduce" data-product-id="@item.Product.Id" data-product-quantity="@item.Quantity">-</button>
+                                    </div>
+                                    <input class="text-center" maxlength="3" id="item-quantity-for-product-@item.Product.Id" style="width:40px; border-radius: 0 0;" value="@item.Quantity" readonly>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary btn-group" id="item-quantity-control" data-action="increase" data-product-id="@item.Product.Id" data-product-quantity="@item.Quantity">+</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="table-cell-text">@item.Amount PLN</div>
+
+                            <div class="table-cell-text">
+
+                                <button class="btn btn-outline-danger btn-sm" id="remove-from-cart-full" data-product-id="@item.Product.Id">Delete</button>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="table-row wrapper">
+                <div class="wrapper flex-grow-1 bt-1">
+                    <div class="wrapper flex-grow-1">
+                        <div class="table-cell-text font-italic">Subtotal:</div>
+
+                        <div class="table-cell-text"></div>
+                        <div class="table-cell-text font-italic">@Model.CartAmount PLN</div>
+                        <div class="table-cell-text"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="control-area">
+            <a href="@Url.Action("CheckoutOptions", "Order")" class="btn btn-success ml-3 mb-3 btn-shrink">Checkout Now</a>
+            <a href="@Url.Action("Index", "Home")" class="btn btn-warning ml-3 mb-3 btn-shrink">Continue Shopping</a>
+        </div>
+    }
+}
+

@@ -1,0 +1,93 @@
+﻿@model SubcategoryViewModel
+
+@{ ViewData["Title"] = Model.Name; }
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css" />
+<link rel="stylesheet" href="~/res/toastr/toastr.css" />
+
+<div class="container-light-thin">@Html.BreadcrumbNavRender()</div>
+
+<div class="container-fluid container-light bg-white">
+
+    <h4>Products in '@Model.Name' (@Model.Products.Count):</h4>
+
+    <table class="table table-condensed entity-datatable">
+        <thead class="text-center">
+            <tr>
+                <th class="text-center d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">Id</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Price</th>
+                <th class="text-center d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">Inventory</th>
+                <th class="text-center d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">Pictures</th>
+                <th class="text-center">Controls</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var product in Model.Products)
+            {
+                <tr>
+                    <td class="text-center d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">@product.Id</td>
+                    <td class="text-center"><a asp-action="AdminView" asp-controller="Product" asp-route-id="@product.Id" class="link-alt">@product.Name.SetLengthLimit(50)</a></td>
+                    <td class="text-center">@product.SalePrice</td>
+
+                    @{ var invDisplayStyle = (product.NumberInStock > 0) ? "" : "text-danger"; }
+
+                    <td class="text-center d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell @invDisplayStyle">
+                        @product.NumberInStock
+                    </td>
+
+                    <td class="text-center d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">
+                        @if (product.Pictures.Count == 0)
+                        {
+                            <span class="text-secondary text-sm-center">No Picture(s) Set</span>
+                        }
+                        else
+                        {
+                            for (var i = 0; i < Math.Min(product.Pictures.Count, 2); i++)
+                            {
+                                <img src="@(Url.Content("~/") + product.Pictures[i].Path)" style="max-width:75px;max-height:75px;" />
+                            }
+                            @if (product.Pictures.Count > 2)
+                            {
+                                <span class="text-secondary">(+@(product.Pictures.Count - 2))</span>
+                            }
+                        }
+                    </td>
+
+                    <td class="text-center">
+                        <a asp-action="Edit" asp-controller="Product" asp-route-id="@product.Id" class="text-warning">Edit</a><span class="text-secondary"> | </span>
+                        <a href="javascript:;" class="ctrl-item-delete text-danger" data-itemId="@product.Id" data-itemName="@product.Name" data-itemType="product">Delete</a><span class="text-secondary"> | </span>
+                        <a asp-action="Display" asp-controller="Product" asp-route-id="@product.Id" class="text-success" target="_blank"><i class="fa fa-eye"></i></a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+    <div class="mt-2">
+        <a asp-action="Edit" asp-controller="Subcategory" asp-route-id="@Model.Id" class="btn btn-outline-warning mr-2 mb-2">Edit Subcategory</a>
+        <a asp-action="Create" asp-controller="Product" asp-route-subcategoryId="@Model.Id" class="btn btn-outline-success mr-2 mb-2">Add Product</a>
+        <a asp-action="EditProductDescriptionFields" asp-controller="Subcategory" asp-route-subcategoryId="@Model.Id" class="btn btn-outline-info mb-2">Description Fields</a>
+    </div>
+</div>
+
+@* Delete confirmation modal *@
+@await Html.PartialAsync("_EntityDeleteConfirmationDialog")
+
+@section Scripts {
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.js"></script>
+    <script src="~/res/toastr/toastr.min.js"></script>
+    <script src="~/js/toastr-custom-settings.js"></script>
+    <script src="~/js/cpanel-entity-datatables.js"></script>
+    <script src="~/js/cpanel-entity-delete-modal.js"></script>
+
+    <script>
+        InitTableForEntity("Products");
+        InitItemDelete("Products");
+    </script>
+}
+

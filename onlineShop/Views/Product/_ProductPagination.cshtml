@@ -1,0 +1,74 @@
+﻿@model SearchResultsViewModel
+
+@{
+    // Navigation link target location and visibility
+    var backDisabled = Model.ProductList.HasPreviousPage ? "" : "disabled";
+    var forwardDisabled = Model.ProductList.HasNextPage ? "" : "disabled";
+
+    var firstDisabled = !Model.ProductList.IsFirstPage ? "" : "disabled";
+    var lastDisabled = !Model.ProductList.IsLastPage ? "" : "disabled";
+
+    var lastHidden = !(Model.ProductList.TotalPages == 1 || Model.ProductList.PageIndex >= Model.ProductList.TotalPages) ? "" : "none";
+    var firstHidden = !(Model.ProductList.TotalPages == 1 || Model.ProductList.PageIndex == 1) ? "" : "none";
+
+    var currentHidden = !(Model.ProductList.IsLastPage) ? "" : "none";
+
+    var priorHidden = !((Model.ProductList.PageIndex) - 1 <= 1) ? "" : "none";
+    var nextHidden = !((Model.ProductList.PageIndex) + 1 >= Model.ProductList.TotalPages) ? "" : "none";
+
+    var leftSeparatorHidden = !(Model.ProductList.PageIndex <= 3) ? "" : "none";
+    var rightSeparatorHidden = !((Model.ProductList.PageIndex + 2) >= Model.ProductList.TotalPages) ? "" : "none";
+
+    // Determine whether pagination should be generated for Catalog Search or Subcategory Display
+    var subcategoryId = (Model.DisplayMode == ProductListDisplayMode.CatalogView) ? null : Model.SubcategoryId.ToString();
+    var controller = (Model.DisplayMode == ProductListDisplayMode.CatalogView) ? "Catalog" : "Subcategory";
+    var action = (Model.DisplayMode == ProductListDisplayMode.CatalogView) ? "SearchResults" : "Display";
+}
+
+<nav class="page-nav">
+    <ul class="pagination">
+        <li class="page-item @backDisabled">
+            <a href="@Url.Action(action, controller,
+            SearchResultsViewModel.GenerateNavLinksWithFilters(Model.ProductList.PageIndex - 1, subcategoryId, Model.ProductQuery))" class="page-link">Previous</a>
+        </li>
+
+        <li class="page-item @firstDisabled">
+            <a href="@Url.Action(action, controller,
+            SearchResultsViewModel.GenerateNavLinksWithFilters(1, subcategoryId, Model.ProductQuery))" class="page-link" style="display:@firstHidden;">1</a>
+        </li>
+
+        <li class="page-item disabled">
+            <span style="display:@leftSeparatorHidden;" class="page-link">...</span>
+        </li>
+
+        <li class="page-item">
+            <a href="@Url.Action(action, controller,
+            SearchResultsViewModel.GenerateNavLinksWithFilters(Model.ProductList.PageIndex - 1, subcategoryId, Model.ProductQuery))" class="page-link" style="display:@priorHidden;">@(Model.ProductList.PageIndex - 1)</a>
+        </li>
+
+        <li class="page-item active">
+            <a href="@Url.Action(action, controller,
+            SearchResultsViewModel.GenerateNavLinksWithFilters(Model.ProductList.PageIndex, subcategoryId, Model.ProductQuery))" class="page-link">@Model.ProductList.PageIndex</a>
+        </li>
+
+        <li class="page-item">
+            <a href="@Url.Action(action, controller,
+            SearchResultsViewModel.GenerateNavLinksWithFilters(Model.ProductList.PageIndex + 1, subcategoryId, Model.ProductQuery))" class="page-link" style="display:@nextHidden;">@(Model.ProductList.PageIndex + 1)</a>
+        </li>
+
+        <li class="page-item disabled">
+            <span style="display:@rightSeparatorHidden;" class="page-link">...</span>
+        </li>
+
+        <li class="page-item @lastDisabled">
+            <a href="@Url.Action(action, controller,
+            SearchResultsViewModel.GenerateNavLinksWithFilters(Model.ProductList.TotalPages, subcategoryId, Model.ProductQuery))" class="page-link" style="display:@lastHidden;">@Model.ProductList.TotalPages</a>
+        </li>
+
+        <li class="page-item @forwardDisabled">
+            <a href="@Url.Action(action, controller,
+            SearchResultsViewModel.GenerateNavLinksWithFilters(Model.ProductList.PageIndex + 1, subcategoryId, Model.ProductQuery))" class="page-link">Next</a>
+        </li>
+
+    </ul>
+</nav>

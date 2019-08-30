@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @{ var title = (ViewData["Title"] == null) ? "onlineShop" : ViewData["Title"] + " - onlineShop"; }
+    <title>@title</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/res/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/bootstrap_colors.css" />
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" />
+
+</head>
+
+<body>
+
+    <header>
+
+        <nav class="fixed-top navbar-dark bg-dark" id="navbarMain">
+
+            <div class="container-nav">
+
+                    <div class="nav-logo"><a href="/">onlineShop</a></div>
+
+                    @* SHOPPING CART *@
+                    <div class="nav-cart-preview pl-2 pr-2">
+                        <a asp-controller="Cart" asp-action="Index" class="text-nowrap nav-item-link">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span id="cart-info-item-count" class="badge badge-secondary badge-pill"></span>
+                        </a>
+
+                        <div class="cart-preview" id="cartPreview">
+                            <div class="cart-preview-content" id="cartPreviewContent"></div>
+                        </div>
+
+                        <a href="javascript:;" id="cartInfo" class="text-nowrap nav-item-link">
+                            <span id="cart-info-amount" class="txt0_8em"></span>
+                            <i id="cart-preview-ctrl" class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+
+                    @* SEARCH BAR *@
+                    <div class="nav-search pl-2 pr-2">
+                        <button class="nav-item-button"><i class="fa fa-search" id="ctrl-search-button"></i></button>
+                        <div id="search-preview">
+                            <div id="search-preview-items">
+                            </div>
+                        </div>
+
+                        <div class="dropdown-search" id="catalogSearch">
+                            <div class="dropdown-search-results" id="catalogSearchResults">
+                            </div>
+                        </div>
+
+                        <input type="text" class="nav-search-input" placeholder="Search" value="@ViewData["CurrentSearch"]" id="ctrl-search-input" />
+                    </div>
+
+                    @* LOGIN LINKS *@
+                    <partial name="/Views/Shared/_LoginPartial.cshtml" />
+
+                    @* MOBILE SIDE NAV (MAIN PAGE ONLY) *@
+                    @if (ViewBag.EnableMobileSidebar != null)
+                    {
+                        <div class="flex-break d-lg-none d-xl-none d-md-none"></div>
+
+                        <div class="nav-sidebar-mobile d-lg-none d-xl-none d-md-none">
+                            <a href="javascript:;" onclick="toggleMobileNav()"><i class="fa fa-bars"></i></a>
+                        </div>
+                    }
+                </div>
+
+        </nav>
+
+    </header>
+
+    <main class="content">
+
+        <noscript>
+
+            <div class="container-light bg-white text-center text-danger">
+                <i class="fa fa-exclamation-circle"></i> <span>This website requires JavaScript. Without JavaScript enabled, some functionalities may be unavailable.</span>
+            </div>
+
+        </noscript>
+
+        <partial name="_CookieConsentPartial" />
+
+        <div class="container-fluid">
+            <noindex>
+                @RenderBody()
+            </noindex>
+        </div>
+
+    </main>
+    <div class="container-fluid">
+        <footer class="container-light bg-white">
+            <div class="footer-container">
+                <div class="footer-item">&copy; 2019 - onlineShop</div>
+                <div class="footer-item"><a href="/Contact" class="link-default">Contact Us</a></div>
+            </div>
+        </footer>
+    </div>
+
+    @* quick scroll to top *@
+    <a href="javascript:;" id="scrollToTop"><i class="fa fa-angle-double-up"></i></a>
+
+    <script src="~/res/jquery/dist/jquery.js"></script>
+    <script src="~/res/bootstrap/dist/js/bootstrap.js"></script>
+
+    <script src="~/js/cart/cart-info-preview.js"></script>
+
+    @RenderSection("Scripts", required: false)
+
+    <script src="~/js/live-search.js"></script>
+
+    <script src="~/js/navbar-adjustments.js"></script>
+    <script src="~/js/util-scroll-top.js"></script>
+
+</body>
+</html>
+

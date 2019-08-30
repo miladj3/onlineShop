@@ -1,0 +1,164 @@
+﻿@model ProductViewModel
+
+@{ var actionName = (Model.Id == 0) ? "Create" : "Edit";
+    var actionButtonCaption = (Model.Id == 0) ? "Create" : "Save";
+    ViewData["Title"] = actionName + " Product";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="container-light-thin">@Html.BreadcrumbNavRender()</div>
+    </div>
+</div>
+
+<div class="col-md-12 bg-white container-light">
+
+    <form asp-action="Save" asp-controller="Product" enctype="multipart/form-data" method="post">
+
+        <div asp-validation-summary="All"></div>
+
+        @{
+            var selectList = new List<SelectListItem> { new SelectListItem { Text = "Active", Value = true.ToString() },
+            new SelectListItem { Text = "Inactive", Value = false.ToString() }
+            };
+        }
+
+        @if (TempData["uploadErrorMessage"] != null)
+        {
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                @TempData["uploadErrorMessage"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+
+        <div class="row justify-content-around">
+
+            <div class="col-md-5">
+                <h5 class="mb-3">General Info</h5>
+
+                <div class="form-group">
+                    <label asp-for="IsActive"></label>
+                    <select asp-for="IsActive" asp-items="@selectList" class="form-control"></select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SalePrice"></label>
+                    <input asp-for="SalePrice" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="NumberInStock"></label>
+                    <input asp-for="NumberInStock" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ProducerCode"></label>
+                    <input asp-for="ProducerCode" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="CatalogCode"></label>
+                    <input asp-for="CatalogCode" class="form-control" />
+                </div>
+
+                <input asp-for="Id" hidden />
+                <input asp-for="SubcategoryId" hidden />
+                <input asp-for="AddedBy" hidden />
+
+            </div>
+
+
+            <div class="col-md-5 offset-2">
+
+                <h5 class="mb-3">Specifications</h5>
+
+                @if (Model.ProductDescriptionItems.Count > 0)
+                {
+                    @for (var i = 0; i < Model.ProductDescriptionItems.Count; i++)
+                    {
+                        <div class="form-group">
+                            <label>@Model.ProductDescriptionItems[i].Field.Name</label>
+                            <input asp-for="ProductDescriptionItems[i].Value" class="form-control" />
+                            <input asp-for="ProductDescriptionItems[i].FieldId" class="form-control" hidden />
+                            <input asp-for="ProductDescriptionItems[i].Id" class="form-control" hidden />
+                        </div>
+                    }
+                } else
+                {
+                    <span>No <a asp-action="EditProductDescriptionFields" asp-controller="Subcategory" asp-route-subcategoryId="@Model.SubcategoryId" class="link-alt">subcategory-specific description fields</a> have been configured.</span>
+                }
+
+            </div>
+
+
+        </div>
+
+        <hr />
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <h5 class="mb-3">Pictures</h5>
+
+                <div class="form-group">
+
+                    @if (Model.Pictures.Count > 0)
+                    {
+                        <span>Current pictures:</span>
+                        <div>
+                            @foreach (var pic in Model.Pictures)
+                            {
+                                <img src="@(Url.Content("~/") + pic.Path)" style="max-width:150px;max-height:150px;" />
+                            }
+                        </div>
+
+                        <input asp-for="RemoveExistingImages" type="checkbox" class="form-check-inline d-inline" />
+                        <label asp-for="RemoveExistingImages"></label>
+
+                    }
+                    <input asp-for="PicturesToUpload" type="file" class="form-control-file maxw-500" multiple />
+                </div>
+
+                <hr />
+
+                <h5 class="mb-3 mt-2">Full Description</h5>
+
+                <div class="form-group">
+                    <textarea asp-for="ExtendedDescriptionMarkup" class="form-control" id="rich-text-editor"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-success">@actionButtonCaption</button>
+            </div>
+        </div>
+
+    </form>
+
+    <hr />
+
+    <form id="uploadForm" name="upload" enctype="multipart/form-data" method="post">
+        <div class="control-area">
+            <div class="ctrl-upload">
+                <label class="d-block">Quick Image Upload and Paste:</label>
+                <input id="filesToUpload" class="maxw-500 w-100" type="file" multiple onchange="uploadFiles();" />
+            </div>
+        </div>
+        <div id="filesUploaded" style="display:none;">
+            <a id="resetUploaded" href="javascript:;" class="btn btn-sm btn-danger">Close</a>
+        </div>
+    </form>
+
+</div>
+
+@section Scripts {
+    <script src="~/res/ckeditor/ckeditor.js"></script>
+    <script src="~/js/cpanel-rich-text-editor.js"></script>
+}
+

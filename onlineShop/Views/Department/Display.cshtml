@@ -1,0 +1,65 @@
+﻿@model DepartmentViewModel
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="row">
+
+    @if (Model.Categories.Count == 0)
+    {
+        <div class="col-md-12 bg-white container-light h-100">
+            <span>This catalog department is empty.</span>
+        </div>
+    }
+    else
+    {
+        <div class="col-md-3 d-none d-lg-block d-md-block">
+            <div class="col-md-12 bg-white container-light h-100">
+
+                <h5 class="text-center">Categories</h5>
+                <hr />
+
+                @foreach (var cat in Model.Categories)
+                {
+                    <div class="menu-item-link text-center">
+                        <a asp-controller="Category" asp-action="Display" asp-route-id=@cat.Id>@cat.Name</a>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-9 pl-md-0">
+
+            <div class="container-light-thin">@Html.BreadcrumbNavRender()</div>
+
+            <div class="col-md-12 bg-white container-light">
+
+                <div class="row">
+                    @foreach (var cat in Model.Categories)
+                    {
+                        <div class="col-md-4 px-2">
+                            <div class="productlist-item">
+                                <div>
+                                    <a class="link-default" asp-controller="Category" asp-action="Display" asp-route-id=@cat.Id>
+                                        <div class="productlist-img-container">
+                                            @if (cat.Picture == null)
+                                            {
+                                                <img src="@Url.Content("~/images/no_image_available.png")" class="productlist-img" />
+                                            }
+                                            else
+                                            {
+                                                <img src="@(Url.Content("~/") + cat.Picture.Path)" class="productlist-img" />
+                                            }
+                                        </div>
+                                        <div class="text-center">@cat.Name</div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

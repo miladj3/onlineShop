@@ -1,0 +1,14 @@
+﻿@model OrderDTO
+
+<ul class="list-unstyled">
+    @{ foreach (var option in Enum.GetValues(typeof(PaymentMethod)))
+        {
+            <li>
+                <input asp-for="DeliveryDetails.PaymentMethod" type="radio" value="@option" class="payment-method-control" id="@option" />
+                <label>
+                    @HtmlExtensions.EnumDisplayNameFor((PaymentMethod)option)
+                </label>
+            </li>
+        }
+    }
+</ul>

@@ -1,0 +1,108 @@
+﻿@model List<UserViewModel>
+
+@{ ViewData["Title"] = "Manage Users"; }
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css" />
+<link rel="stylesheet" href="~/res/toastr/toastr.css" />
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <div class="container-light-thin">@Html.BreadcrumbNavRender()</div>
+
+    </div>
+
+    <div class="col-md-12">
+
+        <div class="container-fluid container-light bg-white mb-3">
+
+            @{
+                var btnCustStyle = (String.Equals(TempData["content"], "customers")) ? "btn-secondary disabled" : "btn-outline-secondary";
+                var btnEmpStyle = (String.Equals(TempData["content"], "employees")) ? "btn-secondary disabled" : "btn-outline-secondary";
+                var isCustomerList = (String.Equals(TempData["content"], "customers"));
+            }
+
+            <div class="btn-group" role="group" style="margin-bottom:1em;">
+                <a class="btn @btnCustStyle" href="@Url.Action("ManageCustomers", "User")">Customers <i class="fa fa-users"></i></a>
+                <a class="btn @btnEmpStyle" href="@Url.Action("ManageEmployees", "User")">Employees <i class="fa fa-id-card"></i></a>
+            </div>
+
+            <table class="table table-striped entity-datatable" id="userTable">
+
+                <thead>
+
+                    <tr>
+                        <th>Email</th>
+                        <th>Full Name</th>
+                        <th class="d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">Phone Number</th>
+                        <th class="d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">Joined On</th>
+
+                        @if (isCustomerList)
+                        {
+                            <th class="d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">Orders</th>
+                        }
+
+                        @if (!isCustomerList)
+                        {
+                            <th class="d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">Roles</th>
+                        }
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td><a asp-controller="User" asp-action="AdminViewEdit" asp-route-id="@user.UserId" class="link-alt">@user.Email</a></td>
+                            <td>@user.Firstname @user.Lastname</td>
+                            <td class="d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">@user.PhoneNumber</td>
+                            <td class="d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">@user.RegisteredOn</td>
+
+                            @if (isCustomerList)
+                            {
+                                <td class="d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">@user.Orders.Count</td>
+                            }
+                            else
+                            {
+                                <td class="d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">
+                                    <ul class="list-unstyled">
+                                        @foreach (var role in user.Roles)
+                                        {
+                                            <li>@role.Rolename</li>
+                                        }
+                                    </ul>
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+
+                <tfoot>
+
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th class="d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell"></th>
+                        <th class="d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell"></th>
+                        <th class="d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell"></th>
+                    </tr>
+
+                </tfoot>
+
+            </table>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.js"></script>
+    <script src="~/js/cpanel-entity-datatables.js"></script>
+
+    <script>
+        InitTableForEntity('UsersAll');
+    </script>
+}

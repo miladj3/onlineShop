@@ -1,0 +1,34 @@
+﻿
+<ul class="nav nav-pills nav-stacked">
+    <li class="btn-block @ManageNavPages.IndexNavClass(ViewContext)">
+        <h6>
+            <a asp-page="./Index">
+                <i class="fa fa-address-card-o mr-2 minw-1rem"></i>Profile
+            </a>
+        </h6>
+    </li>
+
+    <li class="btn-block @ManageNavPages.ChangePasswordNavClass(ViewContext)">
+        <h6>
+            <a id="change-password" asp-page="./ChangePassword">
+                <i class="fa fa-unlock-alt mr-2 minw-1rem"></i>Password
+            </a>
+        </h6>
+    </li>
+
+    <li class="btn-block @ManageNavPages.ChangeDeliveryAddressNavClass(ViewContext)">
+        <h6>
+            <a id="change-address" asp-page="./ChangeDeliveryAddress">
+                <i class="fa fa-truck mr-2 minw-1rem"></i>Default Delivery Address
+            </a>
+        </h6>
+    </li>
+
+    <li class="btn-block @ManageNavPages.OrderListNavClass(ViewContext)">
+        <h6>
+            <a id="change-address" asp-page="./OrderList">
+                <i class="fa fa-archive mr-2 minw-1rem"></i>Order History
+            </a>
+        </h6>
+    </li>
+</ul>

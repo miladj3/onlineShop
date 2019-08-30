@@ -1,0 +1,50 @@
+﻿@model Blog
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container-light-thin">@Html.BreadcrumbNavRender()</div>
+
+<div class="container-fluid container-light bg-white">
+
+    @{
+        var status = Model.IsPublished ? "Published" : "Not Published";
+        var statusDisplayClass = Model.IsPublished ? "text-success" : "text-danger";
+    }
+
+    <div class="flex-preset-1 mb-2 flex-wrap">
+        <span class="text-secondary font-italic">Posted by @Model.AddedBy on @Model.AddedOn.ToLocalTime()</span>
+        <span class="@statusDisplayClass">@status</span>
+    </div>
+
+    <h4>@Model.Title</h4>
+
+    <div class="blog-content clearfix">
+        @Html.Raw(Model.Markup)
+    </div>
+
+    @if (Model.LastModifiedOn != null)
+    {
+        <span class="text-secondary font-italic">Last update by @Model.LastModifiedBy.UserName on @Model.LastModifiedOn.TryToLocalDateTime()</span>
+    }
+
+    <div class="control-area">
+        <a class="btn btn-warning" href="@Url.Action("Edit", "Blog", new { id = Model.Id })">Edit</a>
+        <a class="btn btn-danger ctrl-item-delete" href="javascript:;" data-itemId="@Model.Id" data-itemType="Blog" data-itemName="@Model.Title">Delete</a>
+    </div>
+
+</div>
+
+@* Delete confirmation modal *@
+@await Html.PartialAsync("_EntityDeleteConfirmationDialog")
+
+@section Scripts {
+    <script src="~/js/cpanel-entity-delete-modal.js"></script>
+    <script>
+        InitItemDelete("Blogs");
+    </script>
+}
+
+
+

@@ -1,0 +1,14 @@
+﻿@model OrderDTO
+
+<ul class="list-unstyled">
+    @{ foreach (var option in Enum.GetValues(typeof(DeliveryMethodType)))
+        {
+            <li>
+                <input asp-for="@Model.DeliveryDetails.DeliveryMethodType" type="radio" value="@option" class="delivery-mode-switch" autocomplete="off" />
+                <label>
+                    @HtmlExtensions.EnumDisplayNameFor((DeliveryMethodType)option)
+                </label>
+            </li>
+        }
+    }
+</ul>

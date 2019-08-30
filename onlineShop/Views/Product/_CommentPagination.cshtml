@@ -1,0 +1,62 @@
+﻿@model PaginatedList<ProductComment>
+
+@{
+    // Navigation Link Access & Visibility
+
+    var backDisabled = Model.HasPreviousPage ? "" : "disabled";
+    var forwardDisabled = Model.HasNextPage ? "" : "disabled";
+
+    var firstDisabled = !Model.IsFirstPage ? "" : "disabled";
+    var lastDisabled = !Model.IsLastPage ? "" : "disabled";
+
+    var lastHidden = !(Model.TotalPages == 1 || Model.PageIndex >= Model.TotalPages) ? "" : "none";
+    var firstHidden = !(Model.TotalPages == 1 || Model.PageIndex == 1) ? "" : "none";
+
+    var currentHidden = !(Model.IsLastPage) ? "" : "none";
+
+    var priorHidden = !((Model.PageIndex) - 1 <= 1) ? "" : "none";
+    var nextHidden = !((Model.PageIndex) + 1 >= Model.TotalPages) ? "" : "none";
+
+    var leftSeparatorHidden = !(Model.PageIndex <= 3) ? "" : "none";
+    var rightSeparatorHidden = !((Model.PageIndex + 2) >= Model.TotalPages) ? "" : "none";
+}
+
+<nav class="page-nav">
+    <ul class="pagination">
+        <li class="page-item @backDisabled">
+            <a href="javascript:;" data-nav-id="@(Model.PageIndex - 1)" class="page-link comment-page-link">Previous</a>
+        </li>
+
+        <li class="page-item @firstDisabled">
+            <a href="javascript:;" data-nav-id="1"  class="page-link comment-page-link" style="display:@firstHidden;">1</a>
+        </li>
+
+        <li class="page-item disabled">
+            <span style="display:@leftSeparatorHidden;" class="page-link comment-page-link">...</span>
+        </li>
+
+        <li class="page-item">
+            <a href="javascript:;" data-nav-id="@(Model.PageIndex - 1)" class="page-link comment-page-link" style="display:@priorHidden;">@(Model.PageIndex - 1)</a>
+        </li>
+
+        <li class="page-item active">
+            <a href="javascript:;" data-nav-id="@(Model.PageIndex)" class="page-link comment-page-link">@Model.PageIndex</a>
+        </li>
+
+        <li class="page-item">
+            <a href="javascript:;" data-nav-id="@(Model.PageIndex + 1)" class="page-link comment-page-link" style="display:@nextHidden;">@(Model.PageIndex + 1)</a>
+        </li>
+
+        <li class="page-item disabled">
+            <span style="display:@rightSeparatorHidden;" class="page-link comment-page-link">...</span>
+        </li>
+
+        <li class="page-item @lastDisabled">
+            <a href="javascript:;" data-nav-id="@(Model.TotalPages)" class="page-link comment-page-link" style="display:@lastHidden;">@Model.TotalPages</a>
+        </li>
+
+        <li class="page-item @forwardDisabled">
+            <a href="javascript:;" data-nav-id="@(Model.PageIndex + 1)" class="page-link comment-page-link">Next</a>
+        </li>
+    </ul>
+</nav>

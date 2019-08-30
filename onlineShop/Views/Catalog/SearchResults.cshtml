@@ -1,0 +1,171 @@
+﻿@model SearchResultsViewModel
+
+@{
+    ViewData["Title"] = "Catalog Search";
+}
+
+<header>
+    <link href="~/res/jqueryui/jquery-ui.css" rel="stylesheet" />
+</header>
+
+<div class="row">
+
+    <div class="col-lg-3">
+
+        <div class="filters-toggle filters-toggle-visible" onclick="toggleFilters();">
+            Filters
+        </div>
+
+        <div class="filters-container filters-container-hidden bg-white container-light">
+
+            <div id="filters">
+                <a href="javascript:void(0)" class="filters-close filters-close-visible text-right float-right" onclick="toggleFilters()">&times;</a>
+
+                <h5 class="text-center">Filters</h5>
+
+                <form asp-action="Search" asp-controller="Catalog" method="post">
+
+                    <div class="form-group">
+                        <label asp-for="ProductQuery.SearchString"></label>
+                        <input asp-for="ProductQuery.SearchString" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="d-block">Price Range:</label>
+                        <input type="text" id="amount" class="border-0 bg-transparent">
+                        <div id="slider-range"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <input asp-for="ProductQuery.MaxPrice" id="query-max-price" data-u-limit="@Model.priceLimitMax" class="form-control" hidden />
+                    </div>
+
+                    <div class="form-group">
+                        <input asp-for="ProductQuery.MinPrice" id="query-min-price" data-l-limit="@Model.priceLimitMin" class="form-control" hidden />
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ProductQuery.OrderBy"></label>
+                        <select asp-for="ProductQuery.OrderBy" class="form-control" asp-items="@(new SelectList(Enum.GetValues(typeof(OrderBy))))"></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ProductQuery.OrderDirection"></label>
+                        <select asp-for="ProductQuery.OrderDirection" class="form-control" asp-items="@(new SelectList(Enum.GetValues(typeof(OrderDirection))))"></select>
+                    </div>
+
+                    <div class="form-group">
+                        <input asp-for="ProductQuery.OnlyAvailable" type="checkbox" />
+                        <label asp-for="ProductQuery.OnlyAvailable"></label>
+                    </div>
+
+                    <button asp-action="Search" asp-controller="Catalog" class="btn btn-success btn-sm">Filter</button>
+                    <button asp-action="ResetFilters" asp-controller="Catalog" class="btn btn-outline-success btn-sm">Reset</button>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-lg-9  pl-lg-0">
+
+        <div class="container-light-thin">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active">Search Results (@Model.ProductList.ItemsTotal)</li>
+            </ol>
+        </div>
+
+        <div class="col-md-12 bg-white container-light">
+            <div class="row">
+
+                @if (Model.ProductList.Count == 0)
+                {
+                    <span>No products found.</span>
+                }
+                else
+                {
+                    @foreach (var prod in Model.ProductList)
+                    {
+                        <div class="col-md-6 col-lg-4 px-2">
+                            <div class="productlist-item">
+
+                                <div>
+                                    <a class="link-default" asp-controller="Product" asp-action="Display" asp-route-id=@prod.Id>
+                                        <div class="productlist-img-container">
+                                            @if (prod.Pictures.Count == 0)
+                                            {
+                                                <img src="@(Url.Content("~/images/no_image_available.png"))" class="productlist-img" />
+                                            }
+                                            else
+                                            {
+                                                <img src="@((Url.Content("~/")) + @prod.Pictures[0].Path)" class="productlist-img" />
+                                            }
+                                        </div>
+                                        <h6 class="productlist-item-name">@prod.Name</h6>
+                                    </a>
+                                </div>
+
+                                <div alt="@prod.RatingOverall">
+
+                                    @for (var i = 1; i <= 6; i++)
+                                    {
+                                        if (Math.Floor(prod.RatingOverall) >= i)
+                                        {
+                                            <i class="fa fa-star fa-star-active fs12"></i>
+                                        }
+                                        else if ((i - prod.RatingOverall) < 0.9)
+                                        {
+                                            <i class="fa fa-star-half-empty fa-star-active fs12"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="fa fa-star fa-star-inactive fs12"></i>
+                                        }
+                                    }
+
+                                    <span class="text-secondary fs09">(@prod.RatingCount <i class="fa fa-thumbs-o-up"></i><i class="fa fa-thumbs-o-down"></i>, @prod.Comments.Count <i class="fa fa-comment-o"></i>)</span>
+
+                                </div>
+
+                                <div>
+                                    @foreach (var descItem in prod.ProductDescriptionItems)
+                                    {
+                                        if (descItem.Field.DisplayInItemPreview)
+                                        {
+                                            <span class="product-item-desc-preview">@descItem.Field.Name : @descItem.Value</span>
+                                        }
+                                    }
+                                </div>
+
+                                <div class="productlist-item-price">@prod.SalePrice PLN</div>
+                                @if (prod.IsAvailable)
+                                {
+                                    <button class="btn btn-outline-success btn-sm productlist-item-buy" data-product-id="@prod.Id" name="catalog-add-to-cart"><i class="fa fa-shopping-cart"></i></button>
+                                }
+                                else
+                                {
+                                    <span class="text-danger productlist-item-buy">Out of stock.</span>
+                                }
+                            </div>
+                        </div>
+                    }
+                }
+
+            </div>
+
+            <div class="row">
+                @if (!(Model.ProductList.Count == 0))
+                {
+                    @await Html.PartialAsync("/Views/Product/_ProductPagination.cshtml", Model);
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/res/jqueryui/jquery-ui.js"></script>
+    <script src="~/js/product-filters.js"></script>
+}

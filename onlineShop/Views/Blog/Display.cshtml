@@ -1,0 +1,37 @@
+﻿@model Blog
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container-light-thin">@Html.BreadcrumbNavRender()</div>
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="container-fluid container-light bg-white">
+
+                <div class="flex-preset-1 flex-wrap">
+
+                    <h4>@Model.Title</h4>
+
+                    <span class="text-secondary font-italic">
+
+                        @if (Model.DisplayDate)
+                        {
+                            @Model.AddedOn.ToLocalTime()
+                        }
+
+                    </span>
+
+                </div>
+
+                <div class="blog-content clearfix">
+                    @Html.Raw(Model.Markup)
+                </div>
+
+        </div>
+    </div>
+</div>
+
+

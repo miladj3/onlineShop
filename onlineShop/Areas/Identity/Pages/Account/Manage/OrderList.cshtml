@@ -1,0 +1,51 @@
+﻿@page
+@model OrderListModel
+@{
+    ViewData["Title"] = "Past Orders";
+}
+
+<h4>@ViewData["Title"]</h4>
+
+
+<div class="row">
+    <div class="col-md-8">
+
+        @if (Model.OrderList.Count == 0)
+        {
+            <span>Your don't have any orders yet.</span>
+        }
+        else
+        {
+
+            <table class="table table-condensed" style="font-size:85%;">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Created On</th>
+                        <th>Status</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var order in Model.OrderList)
+                    {
+                        <tr>
+                            <td>@order.Id</td>
+                            <td><a asp-page="OrderDetails" asp-route-id="@order.Id" class="link-alt">@order.CreatedOn</a></td>
+                            <td>@order.Status</td>
+                            <td>@order.OrderAmountTotal</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

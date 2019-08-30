@@ -1,0 +1,117 @@
+﻿@model MainPageViewModel
+
+<div id="mobileSideNav" class="sidenav">
+    <a href="javascript:void(0)" class="text-right" onclick="toggleMobileNav()">&times;</a>
+
+    @if (Model.Departments.Count == 0)
+    {
+        <span>No catalog departments set up.</span>
+    }
+    else
+    {
+
+        @foreach (var dep in Model.Departments)
+        {
+            <div class="menu-item-link text-center">
+                <a asp-controller="Department" asp-action="Display" asp-route-id=@dep.Id>@dep.Name</a>
+            </div>
+        }
+    }
+
+</div>
+
+<div class="row">
+
+    <div class="col-md-3 d-none d-lg-block d-md-block">
+
+        <div class="col-md-12 bg-white container-light h-100">
+
+            @if (Model.Departments.Count == 0)
+            {
+                <span>No catalog departments set up.</span>
+            }
+            else
+            {
+                <h5 class="text-center">Departments</h5>
+                <hr />
+
+                @foreach (var dep in Model.Departments)
+                {
+                    <div class="menu-item-link text-center">
+                        <a asp-controller="Department" asp-action="Display" asp-route-id=@dep.Id>@dep.Name</a>
+                    </div>
+                }
+            }
+
+        </div>
+
+    </div>
+
+    <div class="col-md-9 pl-md-0">
+
+        <div class="col-md-12 bg-white container-light h-100">
+            <div>
+
+                @if (Model.Blogs.Count == 0)
+                {
+                    <span>No blogs created yet.</span>
+                }
+                else
+                {
+                    @foreach (var blog in Model.Blogs)
+                    {
+                        <div class="blog-preview">
+                            <div class="flex-preset-1 flex-wrap">
+
+                                <h5><a asp-controller="Blog" asp-action="Display" asp-route-id="@blog.Id">@blog.Title</a></h5>
+
+                                <span class="text-secondary font-italic">
+
+                                    @if (blog.DisplayDate)
+                                    {
+                                        @blog.AddedOn.ToLocalTime()
+                                    }
+                                    @if (blog.IsPinned)
+                                    {
+                                        <i class="fa fa-thumb-tack"></i>
+                                    }
+
+                                </span>
+
+                            </div>
+
+                            <div class="blog-preview-body blog-content clearfix">
+                                @Html.Raw(blog.Markup)
+                            </div>
+
+                            <div class="link-blog-full flex-preset-2">
+                                <a asp-controller="Blog" asp-action="Display" asp-route-id="@blog.Id">
+                                    <i class="fa fa-arrow-circle-o-right"></i> Read More
+                                </a>
+                            </div>
+                        </div>
+                    }
+                }
+
+            </div>
+
+            @if (Model.Blogs.Count > 0)
+            {
+                <div class="link-blog-all">
+                    <span>
+                        <a asp-controller="Blog" asp-action="Index" class="fw600 fs12">
+                            <i class="fa fa-calendar"></i> Read All Blogs
+                        </a>
+                    </span>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/sidenav-mobile.js"></script>
+}
+
+

@@ -1,0 +1,21 @@
+﻿
+<div class="modal fade" id="deleteItemModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-danger">Delete <span class="deleteItemType">Item</span></h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <span>Are you sure you want to delete this <span class="deleteItemType">item</span>?</span>
+                <div class="text-capitalize font-weight-bold"><span id="deleteItemName"></span> <span id="deleteItemId"></span></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="itemDeleteConfirm" data-itemId="0">Delete</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

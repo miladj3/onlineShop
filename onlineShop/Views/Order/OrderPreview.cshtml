@@ -1,0 +1,39 @@
+﻿@model OrderDTO
+
+<div class="card card-body">
+
+    <div class="order-summary-details">
+        <h5>Items</h5>
+        @Html.DisplayForModel("OrderItems", Model)
+    </div>
+
+    <div class="order-summary-details">
+        @Html.DisplayForModel("OrderTotals", Model)
+    </div>
+
+    <div class="order-summary-details">
+        <h5>Delivery Details:</h5>
+        @Html.DisplayForModel("OrderDeliveryDetails", Model)
+    </div>
+
+    <div class="order-summary-details">
+        <h5>Payment Details:</h5>
+        @Html.DisplayForModel("OrderPaymentDetails", Model)
+    </div>
+
+    <div class="order-summary-details">
+        <h5>Additional Information:</h5>
+        @Html.DisplayForModel("OrderComment", Model)
+    </div>
+
+    <div class="order-summary-details">
+        <div class="form-check user-agreements">
+            <input type="checkbox" class="user-agreement form-check-input" id="user-agreement-1" />
+            <label class="form-check-label" for="user-agreement-1">
+                <span class="text-danger font-weight-bold ml-1">*</span>
+                I agree with <a asp-page="/TermsAndConditions" target="_blank" class="link-alt">Terms and Conditions</a>
+            </label>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,465 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>aspnet-onlineShop-1E74C0F3-D035-432F-807E-0CE6F6C3C9FB</UserSecretsId>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="breadcrumb_sitemap.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\Identity\Services\**" />
+    <Compile Remove="Data\Migrations\**" />
+    <Content Remove="Areas\Identity\Services\**" />
+    <Content Remove="Data\Migrations\**" />
+    <EmbeddedResource Remove="Areas\Identity\Services\**" />
+    <EmbeddedResource Remove="Data\Migrations\**" />
+    <None Remove="Areas\Identity\Services\**" />
+    <None Remove="Data\Migrations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\uploads\04b1de33f70a4cf9b83470fa41120c098ea1fea85ccb479d8a14c83c25776dd14142733_1_i1064 - Copy - Copy.jpg" />
+    <Content Remove="wwwroot\uploads\04b1de33f70a4cf9b83470fa41120c098ea1fea85ccb479d8a14c83c25776dd14142733_1_i1064 - Copy.jpg" />
+    <Content Remove="wwwroot\uploads\04b1de33f70a4cf9b83470fa41120c098ea1fea85ccb479d8a14c83c25776dd14142733_1_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\06398a3311fc4dcbba008b3166cdeac64141839_2018_08_20_15_09_47675492286.jpeg" />
+    <Content Remove="wwwroot\uploads\077a06d74f274358a8902e1848d9c7c54141839_2018_08_20_15_09_47675492286.jpeg" />
+    <Content Remove="wwwroot\uploads\0919ff5c398d4d3cb5bf4163f552858frx480car_678x452_678x452.jpg" />
+    <Content Remove="wwwroot\uploads\09e2dfe294af42ef9ad162da1ffaf189table1.jpg" />
+    <Content Remove="wwwroot\uploads\0d862271cca14e96a312cde52c623bb74142733_1_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\0f396547c1034c898f82139c94a2bf471013141-1_600x600.jpg" />
+    <Content Remove="wwwroot\uploads\12216fe832aa43049f228501c818caab4142733_0_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\12e64ce39ad1432db30596c54008ecddtable1.jpg" />
+    <Content Remove="wwwroot\uploads\144eec9fadbf474aa74a0c36ddd36930table2.jpg" />
+    <Content Remove="wwwroot\uploads\14511fbc6ea44ae894822585071671912bff59c0352b4c52a83dcd58b6a7f6e512216fe832aa43049f228501c818caab4142733_0_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\15b1fd6cbe7d43018cc4ade335cffab4monitor.jpg" />
+    <Content Remove="wwwroot\uploads\1a970ca195fd40589f0e0ea346b764dd81fqadZxgOL._SX425_.jpg" />
+    <Content Remove="wwwroot\uploads\1ab893c795e641218b13f1327a9cbdfe81fqadZxgOL._SX425_.jpg" />
+    <Content Remove="wwwroot\uploads\1e784f1aa5f344dfbbe17299a2d34f939b694399cfd2419ca3184358eabfa98fpralka.jpg" />
+    <Content Remove="wwwroot\uploads\1ff0c70ddbf64a1a878856f3048b1a344141839_2018_08_20_15_09_47675492286.jpeg" />
+    <Content Remove="wwwroot\uploads\21b40c32239e4f96ba26d9f49e1ecc5btable2.jpg" />
+    <Content Remove="wwwroot\uploads\226946b57e1b4a4283ddb8fd9e3f8641monitor.jpg" />
+    <Content Remove="wwwroot\uploads\244dad255530418ab723efaf7966df608ed8644c54f34f858135a25fd80973c6418b683ed5424127bb71818637b0e2f22bff59c0352b4c52a83dcd58b6a7f6e512216fe832aa43049f228501c818caab4142733_0_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\254c8f25a2224d0f80c573604137bef01013141-1_600x600.jpg" />
+    <Content Remove="wwwroot\uploads\254fbe002aec46ef90f62381730c1ed7monitor.jpg" />
+    <Content Remove="wwwroot\uploads\262052b582164d03a4d724e526878837table1.jpg" />
+    <Content Remove="wwwroot\uploads\27913a06709e44a580cb0f56792c60a8monitor.jpg" />
+    <Content Remove="wwwroot\uploads\2792a867c9f94899a143fc9b7697d87d4142733_0_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\2bff59c0352b4c52a83dcd58b6a7f6e512216fe832aa43049f228501c818caab4142733_0_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\2c1a7b72404247139139bb1088335df1monitor.jpg" />
+    <Content Remove="wwwroot\uploads\2e16b39e92e44557ab7727370e3e75f2table2.jpg" />
+    <Content Remove="wwwroot\uploads\2f3e5c753aa146308e7ec855b6749f794141839_0_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\32caf05ac5aa43b684ed5d6b16c14b74monitor.jpg" />
+    <Content Remove="wwwroot\uploads\343b84cde3a2424ca7321eb0193b5121ram.jpg" />
+    <Content Remove="wwwroot\uploads\37298565c4c64e03aec660d50a84e217table2.jpg" />
+    <Content Remove="wwwroot\uploads\3a3b740847534706b8ceba29f8a7b14081fd2fa826de4d60b4d3c787f1b9741e4142733_2_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\3df428a031624e8692200d71cce0d807ram.jpg" />
+    <Content Remove="wwwroot\uploads\3e3dd339806b463fa2f1491bb43587be4141839_2018_08_20_15_09_47675492286.jpeg" />
+    <Content Remove="wwwroot\uploads\3f99255c5b64421881e8047a92230a29monitor.jpg" />
+    <Content Remove="wwwroot\uploads\3fb512b4d3f6448489c30a270f3e6f66table2.jpg" />
+    <Content Remove="wwwroot\uploads\4087f0eee4e142e19a4945bb38a7cba7table2.jpg" />
+    <Content Remove="wwwroot\uploads\4142733_0_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\4142733_1_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\4142733_2_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\4142733_3_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\418b683ed5424127bb71818637b0e2f22bff59c0352b4c52a83dcd58b6a7f6e512216fe832aa43049f228501c818caab4142733_0_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\41e1b2d645ea41c0b71144b31a34c70a4141839_0_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\41e2da2b2f7c4a3595a8f740cc0d9f0aram.jpg" />
+    <Content Remove="wwwroot\uploads\4412f79da6c84d3bb0091a9bcca8561a4141839_0_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\442ec9e70a4c4d7a8ea93a3087d877f9monitor.jpg" />
+    <Content Remove="wwwroot\uploads\446d008ed865435288aca1092eae1d77monitor.jpg" />
+    <Content Remove="wwwroot\uploads\499f88791c064641b38b5cc2da7b621bdepBooks.jpg" />
+    <Content Remove="wwwroot\uploads\4ae1e467e2d340e0a73d86972665d1fa53f45a90ead84841a1577acefac0f39d4142733_1_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\4aeab348d5aa44b8881f6deabbbbfc684141839_2018_08_20_15_09_47675492286.jpeg" />
+    <Content Remove="wwwroot\uploads\4b0fe1b0050a4260b9ae2e247bcf0f4e4141839_0_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\53f45a90ead84841a1577acefac0f39d4142733_1_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\54248da12acf4c569e0d1a16d99aede681fd2fa826de4d60b4d3c787f1b9741e4142733_2_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\5898c4bfb86341f3a3d7e2d9831eeae8subcatCPU.jpg" />
+    <Content Remove="wwwroot\uploads\59c924d1f73c4c18bf236e11f38f0a674141839_2018_08_20_15_09_47675492286.jpeg" />
+    <Content Remove="wwwroot\uploads\5a381b5feabf45459dbf3858592ecd324141839_0_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\5b061397bcc747f5aa59e9f4adc4db794141839_2018_08_20_15_09_47675492286.jpeg" />
+    <Content Remove="wwwroot\uploads\5dbb892be25e40cdbb3776a08144bab64141839_0_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\61ccc4206ea44b788b9c27adbc5a78e8table1.jpg" />
+    <Content Remove="wwwroot\uploads\67d840243bd04c01be0e23d89be2d4e04141839_2018_08_20_15_09_47675492286.jpeg" />
+    <Content Remove="wwwroot\uploads\6abcf0d705f34900a96e1f125daa666b4141839_0_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\6be45505a8494f61830b88c41224b898table1.jpg" />
+    <Content Remove="wwwroot\uploads\6c0402318124472094a9c54917c97d1ctable2.jpg" />
+    <Content Remove="wwwroot\uploads\6c23a7bcff994932965c6f7e1c19c1cemonitor.jpg" />
+    <Content Remove="wwwroot\uploads\6cab792e1b3b45f4a97048e7f2dc3ff2table1.jpg" />
+    <Content Remove="wwwroot\uploads\6dbc09ba6ab8468cb6ae83fe380e3cb7table1.jpg" />
+    <Content Remove="wwwroot\uploads\6e019c812ca24bfda9d8d0edb87f919ctable1.jpg" />
+    <Content Remove="wwwroot\uploads\6e2fd56346e64f98837dc8f13c7c610etester.sql" />
+    <Content Remove="wwwroot\uploads\73a16929560441268621b730c012174btester.sql" />
+    <Content Remove="wwwroot\uploads\75c92e1b2ca141b19f4d108b1c8af478table2.jpg" />
+    <Content Remove="wwwroot\uploads\7dc8277b25fc412db01e1fdd12d0f4b0monitor.jpg" />
+    <Content Remove="wwwroot\uploads\7e7acbf62cf547b1ad12552078d16d9cram.jpg" />
+    <Content Remove="wwwroot\uploads\7e7b1e1dd9a340d2bcda0868001af1934141839_0_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\81fd2fa826de4d60b4d3c787f1b9741e4142733_2_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\838fef7aca894c98987f7ae3c48ea10c4ae1e467e2d340e0a73d86972665d1fa53f45a90ead84841a1577acefac0f39d4142733_1_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\88113c1301c04b56bcfceff0c10d48014141839_0_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\893d4adf739b4b2f97a21d10170fa24d4142733_2_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\8b1a979aa1e04a9da09fa059c30469ab4141839_2018_08_20_15_09_47675492286.jpeg" />
+    <Content Remove="wwwroot\uploads\8dc09d903f53409b9ab2297e94ce454btable2.jpg" />
+    <Content Remove="wwwroot\uploads\8df687c7b4a1422fbfee83c70e30c6b8table2.jpg" />
+    <Content Remove="wwwroot\uploads\8ea1fea85ccb479d8a14c83c25776dd14142733_1_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\8ed8644c54f34f858135a25fd80973c6418b683ed5424127bb71818637b0e2f22bff59c0352b4c52a83dcd58b6a7f6e512216fe832aa43049f228501c818caab4142733_0_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\8ee2a12ca66a4ec88d37512dbfc166f8Electronics_Overview.jpg" />
+    <Content Remove="wwwroot\uploads\90d08499926643bc9579ae4455a6a347table2.jpg" />
+    <Content Remove="wwwroot\uploads\94c505fea06c498183c87f0c1a0d5ab0table1.jpg" />
+    <Content Remove="wwwroot\uploads\9b694399cfd2419ca3184358eabfa98fpralka.jpg" />
+    <Content Remove="wwwroot\uploads\9bacc5b988f34e9a925c48113895e9f1ram.jpg" />
+    <Content Remove="wwwroot\uploads\9fa35310a9cc4f4f8d68c139ad6db966table1.jpg" />
+    <Content Remove="wwwroot\uploads\a3a68b34378a4572a7e27ee22b88083a4141839_2018_08_20_15_09_47675492286.jpeg" />
+    <Content Remove="wwwroot\uploads\a4ebd48b725b42ac9fa437f5e0e29afa4141839_2018_08_20_15_09_47675492286.jpeg" />
+    <Content Remove="wwwroot\uploads\a832da33698b49a298f2a530602ff548midcen-cat-thumb-n.jpg" />
+    <Content Remove="wwwroot\uploads\ab45d3a763024a81808729080d6b0338table2.jpg" />
+    <Content Remove="wwwroot\uploads\acbf7ff0f44344e693803080e7b69915Electronics_Overview.jpg" />
+    <Content Remove="wwwroot\uploads\ad3e12b3e011452582d2b3543e936054table2.jpg" />
+    <Content Remove="wwwroot\uploads\ae1cbe14801e4e8e859c2f29f0adcc702792a867c9f94899a143fc9b7697d87d4142733_0_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\af52f4344a9e45b38ebd83517644aacd4141839_2018_08_20_15_09_47675492286.jpeg" />
+    <Content Remove="wwwroot\uploads\b101c94c7bb5447c976c4bf2cb0f4672msi_1080_oc_4.jpg" />
+    <Content Remove="wwwroot\uploads\b4576bfc6dd846beab94b097691507090_intel_xeon_cpu_x2_13.jpg" />
+    <Content Remove="wwwroot\uploads\b54b602bfae14676ac3bb1d5d15f437aram.jpg" />
+    <Content Remove="wwwroot\uploads\b6148d97a16c4f61a798c11e6fbede76monitor.jpg" />
+    <Content Remove="wwwroot\uploads\b6583eab1f384cc0b0600bb33cfd7f50table1.jpg" />
+    <Content Remove="wwwroot\uploads\b799f4ccdc3c4acfb0214353b61e0ffatable2.jpg" />
+    <Content Remove="wwwroot\uploads\bd376195a64d49b389c928d2714a24cbdepBooks.jpg" />
+    <Content Remove="wwwroot\uploads\bd8830c7bf034f03911b8f17ce0ae53atable2.jpg" />
+    <Content Remove="wwwroot\uploads\bdb8559716d5430a8fa9e111e59f7cedElectronics_Overview.jpg" />
+    <Content Remove="wwwroot\uploads\c193dd6004df431db6429ec206a8f783ram.jpg" />
+    <Content Remove="wwwroot\uploads\c45ca15c251e449c91048ab04fa588a481fqadZxgOL._SX425_.jpg" />
+    <Content Remove="wwwroot\uploads\c51ddfe0592e408bb9e991276bb7f136ram.jpg" />
+    <Content Remove="wwwroot\uploads\catMobile.jpg" />
+    <Content Remove="wwwroot\uploads\catPC.jpg" />
+    <Content Remove="wwwroot\uploads\cd5429928d0543c5b5fcea3be96a1fd34142733_2_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\ce2500040e684e4d859b69f2e8175d438ea1fea85ccb479d8a14c83c25776dd14142733_1_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\d189d087f8ba4a7ba31ed1ec764aa96fpralka.jpg" />
+    <Content Remove="wwwroot\uploads\d48bd935cb15494b937c1e19f371d30c4141839_2018_08_20_15_09_47675492286.jpeg" />
+    <Content Remove="wwwroot\uploads\d8b61068e319400cac39d26e271c0db4.jpg" />
+    <Content Remove="wwwroot\uploads\d8f47d062350473dba8426a30634a1814142733_0_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\dcdd40c1a7fc4e45ba63a973c1427cb24141839_0_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\depBooks.jpg" />
+    <Content Remove="wwwroot\uploads\depElectronics.jpg" />
+    <Content Remove="wwwroot\uploads\df4407c0bbc649d4a7ec6185a730cb2a8ed8644c54f34f858135a25fd80973c6418b683ed5424127bb71818637b0e2f22bff59c0352b4c52a83dcd58b6a7f6e512216fe832aa43049f228501c818caab4142733_0_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\e095dcf8c9114b68b9c6690c6e4feef1table2.jpg" />
+    <Content Remove="wwwroot\uploads\e3d762b51852499da3460071261aad1781fd2fa826de4d60b4d3c787f1b9741e4142733_2_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\e43de2250e0046a6a4a8857f533b3f8f4141839_2018_08_20_15_09_47675492286.jpeg" />
+    <Content Remove="wwwroot\uploads\e45f9e4f33bf4ec4a7ead2ee56888f31pralka.jpg" />
+    <Content Remove="wwwroot\uploads\ec1093ed6fa44b62be67fc267978fa928ea1fea85ccb479d8a14c83c25776dd14142733_1_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\f8e2f71f96a84a0bb7636e43db5c22b74142733_0_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\f95cacc79f80405b94518bc71a640a81ram.jpg" />
+    <Content Remove="wwwroot\uploads\fb9c395719424c808fab6468ce3083ca4142733_0_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\fbfe3814a4324a968d9c547d3de5654d893d4adf739b4b2f97a21d10170fa24d4142733_2_i1064.jpg" />
+    <Content Remove="wwwroot\uploads\fcfb0d8357a244378b065d258b32456fdepBooks.jpg" />
+    <Content Remove="wwwroot\uploads\ff1f2d5402244592914db17b23fe7d8cdepElectronics.jpg" />
+    <Content Remove="wwwroot\uploads\ffc54297074b475baafa61015179ab25midcen-cat-thumb-n.jpg" />
+    <Content Remove="wwwroot\uploads\Sale-Promotional-Banner.jpg" />
+    <Content Remove="wwwroot\uploads\subcatCPU.jpg" />
+    <Content Remove="wwwroot\uploads\subcatGPU.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="z_PENDING_ITEMS.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.7" />
+    <PackageReference Include="HtmlSanitizer" Version="4.0.217" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+    <PackageReference Include="SendGrid" Version="9.11.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Services\" />
+    <Folder Include="wwwroot\res\bootstrap\dist\fonts\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\res\jqueryui\jquery-ui.js" />
+    <None Include="wwwroot\res\jqueryui\jquery-ui.min.js" />
+    <None Include="wwwroot\res\ckeditor\adapters\jquery.js" />
+    <None Include="wwwroot\res\ckeditor\build-config.js" />
+    <None Include="wwwroot\res\ckeditor\ckeditor.js" />
+    <None Include="wwwroot\res\ckeditor\config.js" />
+    <None Include="wwwroot\res\ckeditor\lang\en.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\a11yhelp.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\af.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\ar.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\az.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\bg.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\ca.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\cs.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\cy.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\da.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\de-ch.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\de.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\el.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\en-au.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\en-gb.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\en.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\eo.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\es-mx.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\es.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\et.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\eu.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\fa.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\fi.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\fo.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\fr-ca.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\fr.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\gl.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\gu.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\he.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\hi.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\hr.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\hu.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\id.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\it.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\ja.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\km.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\ko.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\ku.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\lt.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\lv.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\mk.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\mn.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\nb.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\nl.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\no.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\oc.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\pl.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\pt-br.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\pt.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\ro.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\ru.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\si.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\sk.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\sl.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\sq.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\sr-latn.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\sr.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\sv.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\th.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\tr.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\tt.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\ug.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\uk.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\vi.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\zh-cn.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\a11yhelp\dialogs\lang\zh.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\about\dialogs\about.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\clipboard\dialogs\paste.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\dialog\dialogDefinition.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\image\dialogs\image.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\link\dialogs\anchor.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\link\dialogs\link.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\pastefromword\filter\default.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\scayt\CHANGELOG.md" />
+    <None Include="wwwroot\res\ckeditor\plugins\scayt\dialogs\options.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\scayt\LICENSE.md" />
+    <None Include="wwwroot\res\ckeditor\plugins\scayt\README.md" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\af.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\ar.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\az.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\bg.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\ca.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\cs.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\cy.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\da.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\de-ch.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\de.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\el.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\en-au.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\en-ca.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\en-gb.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\en.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\eo.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\es-mx.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\es.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\et.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\eu.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\fa.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\fi.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\fr-ca.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\fr.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\gl.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\he.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\hr.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\hu.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\id.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\it.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\ja.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\km.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\ko.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\ku.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\lt.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\lv.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\nb.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\nl.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\no.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\oc.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\pl.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\pt-br.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\pt.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\ro.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\ru.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\si.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\sk.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\sl.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\sq.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\sr-latn.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\sr.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\sv.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\th.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\tr.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\tt.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\ug.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\uk.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\vi.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\zh-cn.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\lang\zh.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\specialchar\dialogs\specialchar.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\tabletools\dialogs\tableCell.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\table\dialogs\table.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\wsc\dialogs\wsc.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\wsc\dialogs\wsc_ie.js" />
+    <None Include="wwwroot\res\ckeditor\plugins\wsc\LICENSE.md" />
+    <None Include="wwwroot\res\ckeditor\plugins\wsc\README.md" />
+    <None Include="wwwroot\res\ckeditor\skins\moono-lisa\readme.md" />
+    <None Include="wwwroot\res\ckeditor\styles.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Areas\Identity\Pages\Account\Manage\OrderDetails.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Identity\Pages\Account\Manage\OrderList.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Pages\AccountRestricted.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Pages\Error\404.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Pages\TermsAndConditions.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Blog\BlogPagination.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Blog\Display.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Blog\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Blog\AdminView.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Catalog\SearchResults.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Category\Edit.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Category\AdminView.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Order\DisplayTemplates\OrderDeliveryDetails.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Order\DisplayTemplates\OrderComment.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Order\DisplayTemplates\OrderPaymentDetails.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Order\DisplayTemplates\OrderTotals.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Order\DisplayTemplates\OrderInfo.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Order\EditorTemplates\DeliveryMethod.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Order\EditorTemplates\PaymentMethod.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Order\Checkout.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Order\OrderEmailConfirmation.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Order\AdminView.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Product\Display.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Product\Edit.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Product\_CommentPagination.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\Components\Cart\Full.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\Components\Cart\Preview.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\Components\ProductComments\CommentsPaginated.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\_Layout.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Product\_ProductPagination.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\(backup2)__Layout.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\(backup1)__Layout.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\_LoginPartial.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Subcategory\Display.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Category\Display.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Subcategory\Edit.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Subcategory\EditProductDescriptionFields.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Subcategory\AdminView.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\_ViewImports.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\_ViewStart.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
+
+</Project>

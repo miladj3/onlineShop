@@ -1,0 +1,96 @@
+﻿@model List<Order>
+
+@{ ViewData["Title"] = "All Orders"; }
+
+<header>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css" />
+
+</header>
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <div class="container-light-thin">@Html.BreadcrumbNavRender()</div>
+
+    </div>
+
+    <div class="col-md-12">
+
+        <div class="container-fluid container-light bg-white">
+            <table class="table table-striped entity-datatable" id="entityDatatable">
+
+                <thead>
+
+                    <tr>
+                        <th>Id</th>
+                        <th class="d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">Created On</th>
+                        <th>Status</th>
+                        <th>Full Name</th>
+                        <th class="d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">Email</th>
+                        <th class="d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">Last Updated On</th>
+                        <th class="d-none d-sm-none d-md-none d-xl-table-cell d-lg-table-cell">Last Updated By</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @foreach (var order in Model)
+                    {
+                        <tr>
+                            <td>@order.Id</td>
+                            <td class="d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">
+                                <a asp-action="AdminView" asp-controller="Order" asp-route-id="@order.Id" class="link-alt">@order.CreatedOn</a>
+                            </td>
+
+                            <td>@order.Status</td>
+
+                            <td>@order.DeliveryDetails.Firstname @order.DeliveryDetails.Lastname</td>
+
+                            @if (order.HasNoAccount)
+                            {
+                                <td class="d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">@order.DeliveryDetails.EmailAddress</td>
+                            }
+                            else
+                            {
+                                <td class="d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell"><a asp-action="AdminViewEdit" asp-controller="User" asp-route-id="@order.Customer.Id" class="link-alt">@order.Customer.Email</a></td>
+                            }
+
+                            @{ var lastModifiedDate = (order.LastModifiedOn == null) ? "" : order.LastModifiedOn.TryToLocalDateTime().ToString(); }
+
+                            <td class="d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">@lastModifiedDate</td>
+                            <td class="d-none d-sm-none d-md-none d-xl-table-cell d-lg-table-cell">@order.LastModifiedBy</td>
+                        </tr>
+                    }
+
+                </tbody>
+
+                <tfoot>
+
+                    <tr>
+                        <th></th>
+                        <th class="d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell"></th>
+                        <th></th>
+                        <th></th>
+                        <th class="d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell"></th>
+                        <th class="d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell"></th>
+                        <th class="d-none d-sm-none d-md-none d-xl-table-cell d-lg-table-cell"></th>
+                    </tr>
+
+                </tfoot>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts  {
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.js"></script>
+    <script src="~/js/cpanel-entity-datatables.js"></script>
+
+    <script>
+        InitTableForEntity('OrdersAll');
+    </script>
+}

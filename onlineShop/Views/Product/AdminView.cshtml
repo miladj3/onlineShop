@@ -1,0 +1,152 @@
+﻿@model ProductViewModel
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<header>
+    <link href="~/css/smoothproducts.css" rel="stylesheet" />
+</header>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="container-light-thin">@Html.BreadcrumbNavRender()</div>
+    </div>
+</div>
+
+<div class="col-md-12 bg-white container-light">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="sp-wrap">
+                @if (Model.Pictures.Count == 0)
+                {
+                    <a href="@Url.Content("~/images/no_image_available.png")"><img src="@Url.Content("~/images/no_image_available.png")" alt="no image available"></a>
+                }
+                else
+                {
+                    @foreach (var pic in Model.Pictures)
+                    {
+                        <a href="@(Url.Content("~/") + pic.Path)"><img src="@(Url.Content("~/") + pic.Path)"></a>
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="col-md-8">
+
+            <a asp-action="Edit" asp-controller="Product" asp-route-id="@Model.Id" class="btn btn-outline-warning" style="display:inline; float:right;">Edit Product</a>
+
+            <h4 class="mt-3">Product Info</h4>
+
+            @{ var productStatus = (Model.IsActive) ? "Active" : "Inactive";
+                var productStatusColor = (Model.IsActive) ? "text-success" : "text-danger";
+                var numInStockColor = (Model.IsAvailable) ? "text-success" : "text-danger";
+            }
+
+            <div class="mb-3">
+                <div class="flex-preset-5">
+                    <span class="text-secondary">Status</span> <span class="@productStatusColor">@productStatus</span>
+                </div>
+                <div class="flex-preset-5">
+                    <span class="text-secondary">Product ID</span> <span>@Model.Id</span>
+                </div>
+                <div class="flex-preset-5">
+                    <span class="text-secondary">Name</span> <span>@Model.Name</span>
+                </div>
+                <div class="flex-preset-5">
+                    <span class="text-secondary">Current Price</span> <span>@Model.SalePrice PLN</span>
+                </div>
+                <div class="flex-preset-5">
+                    <span class="text-secondary">Number In Stock</span> <span class="@numInStockColor">@Model.NumberInStock</span>
+                </div>
+                <div class="flex-preset-5">
+                    <span class="text-secondary">Producer Code</span> <span>@Model.ProducerCode</span>
+                </div>
+                <div class="flex-preset-5">
+                    <span class="text-secondary">Catalog Code</span> <span>@Model.CatalogCode</span>
+                </div>
+                <div class="flex-preset-5">
+                    <span class="text-secondary">Added On</span> <span>@Model.AddedOn.ToLocalTime()</span>
+                </div>
+                <div class="flex-preset-5">
+                    <span class="text-secondary">Added By</span> <span>@Model.AddedBy</span>
+                </div>
+
+                @if (Model.LastModifiedOn != null)
+                {
+                    <div class="flex-preset-5">
+                        <span class="text-secondary">Last Modified On</span> <span>@Model.LastModifiedOn.TryToLocalDateTime()</span>
+                    </div>
+                    <div class="flex-preset-5">
+                        <span class="text-secondary">Last Modified By</span> <span>@Model.LastModifiedByName</span>
+                    </div>
+                }
+
+            </div>
+
+            <h4>Short Description</h4>
+
+            <div class="mb-3">
+
+                @if (Model.ProductDescriptionItems.Any(pdi => pdi.Field.DisplayInItemPreview))
+                {
+                    @foreach (var descItem in Model.ProductDescriptionItems)
+                    {
+                        @if (descItem.Field.DisplayInItemPreview)
+                        {
+                            <div class="flex-preset-5">
+                                <span class="text-secondary">@descItem.Field.Name</span>
+                                <span>@descItem.Value</span>
+                            </div>
+                        }
+                    }
+                }
+                else
+                {
+                    <span class="text-secondary">No fields marked as 'Show in Preview'.</span>
+                }
+
+            </div>
+
+            <h4>Specifications</h4>
+
+            <div class="mb-3">
+                @foreach (var descItem in Model.ProductDescriptionItems)
+                {
+                    <div class="flex-preset-5">
+                        <span class="text-secondary">@descItem.Field.Name</span>
+                        <span>@descItem.Value</span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+
+        <hr />
+        @if (String.IsNullOrEmpty(Model.ExtendedDescriptionMarkup))
+        {
+            <span class="text-secondary">No extended description provided.</span>
+        }
+        else
+        {
+            <div>
+                @Html.Raw(Model.ExtendedDescriptionMarkup)
+            </div>
+        }
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <script src="~/res/smoothproducts/smoothproducts.js"></script>
+
+    <script>
+        // wait for images to load and init plugin 
+        $(window).on('load', function () {
+            $('.sp-wrap').smoothproducts();
+        });
+    </script>
+}

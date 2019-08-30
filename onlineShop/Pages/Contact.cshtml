@@ -1,0 +1,64 @@
+﻿@page
+@model ContactModel
+@{
+    ViewData["Title"] = "Contact";
+}
+
+
+<div class="container-fluid container-light bg-white">
+    <h4>Contact Us</h4>
+    <hr />
+
+    <div class="flex-preset-1 flex-wrap">
+
+        <div class="flex-1">
+            <h5 class="mt-4 text-nowrap">Visit Our Stores:</h5>
+
+            <ul class="list-unstyled">
+                <li><i class="fa fa-home"></i> Shop #1: Warsaw 02-435, Belwederska 40</li>
+                <li><i class="fa fa-home"></i> Shop #2: Warsaw 02-111, Marszalkowska 35/37</li>
+            </ul>
+        </div>
+
+        <div class="flex-1">
+            <h5 class="mt-4 text-nowrap">Reach Out to Us:</h5>
+
+            <ul class="list-unstyled">
+                <li class="text-nowrap"><i class="fa fa-mail-forward"></i> onlineShop@onlineShop.xyz</li>
+                <li class="text-nowrap"><i class="fa fa-phone"></i> (+48) 123 456 123</li>
+            </ul>
+        </div>
+
+        <div class="flex-1 minw-300">
+            @if (Model.isSubmitted)
+            {
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                    <span>Thank you for your message! We will reach out to you soon.</span>
+                </div>
+            }
+            else
+            {
+                <h5 class="mt-4 text-nowrap">Ask Your Question:</h5>
+
+                <form method="post">
+
+                    <div asp-validation-summary="All"></div>
+
+                    <div class="form-group">
+                        <label asp-for="UserEmail"></label>
+                        <input asp-for="UserEmail" type="email" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="UserMessage"></label>
+                        <textarea asp-for="UserMessage" maxlength="1500" class="form-control"></textarea>
+                    </div>
+
+                    <input type="submit" class="btn btn-success" value="Submit" />
+
+                </form>
+            }
+        </div>
+    </div>
+</div>

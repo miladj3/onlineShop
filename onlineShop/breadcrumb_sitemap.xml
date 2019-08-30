@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<bnb_map>
+  <bnb_root>
+
+    <!-- LEGEND  -->
+    <!-- 'name' - unique identifier  -->
+    <!-- 'action' - target action name  -->
+    <!-- 'controller' - target controller  -->
+    <!-- 'route_id_name' - name of route identifier used by action  -->
+    <!-- 'default_name' - display name (if not provided)  -->
+    <!-- 'src_name' - desired display name in the call to BreadcrumbBuilder  -->
+    <!-- 'src_route_id' - name of route identifier supplied in the call to BreadcrumbBuilder  -->
+
+    <node name="AllBlogs" action="Index" controller="Blog" route_id_name="" default_name="All Blogs" src_name="" src_route_id="">
+      <node name="BlogDisplay" action="Display" controller="Blog" route_id_name="id" default_name="" src_name="blogTitle" src_route_id="blogId"></node>
+    </node>
+    
+    <node name="Home" action="Index" controller="Home" route_id_name="" default_name="Home" src_name="Home" src_route_id="">
+      <node name="DepartmentDisplay" action="Display" controller="Department" route_id_name="id" default_name="" src_name="departmentName" src_route_id="departmentId">
+        <node name="CategoryDisplay" action="Display" controller="Category" route_id_name="id" default_name="" src_name="categoryName" src_route_id="categoryId">
+          <node name="SubcategoryDisplay" action="Display" controller="Subcategory" route_id_name="id" default_name="" src_name="subcategoryName" src_route_id="subcategoryId">
+            <node name="ProductDisplay" action="Display" controller="Product" route_id_name="id" default_name="" src_name="productName" src_route_id="productId">
+
+            </node>
+          </node>
+        </node>
+      </node>
+    </node>
+
+    <node name="ControlPanelIndex" action="Index" controller="ControlPanel" route_id_name="" default_name="Control Panel" src_name="" src_route_id="">
+
+      <node name="CPanelCatalogView" action="ManageCatalog" controller="Catalog" route_id_name="" default_name="Catalog Management" src_name="" src_route_id="">
+        <node name="CPanelDepartmentAdd" action="Create" controller="Department" route_id_name="" default_name="Create Department" src_name="" src_route_id=""></node>
+
+        <node name="CPanelDepartmentView" action="AdminView" controller="Department" route_id_name="id" default_name="" src_name="departmentName" src_route_id="departmentId">
+          <node name="CPanelDepartmentEdit" action="Edit" controller="Department" route_id_name="id" default_name="Edit Department" src_name="" src_route_id="departmentId"></node>
+          <node name="CPanelCategoryAdd" action="Create" controller="Category" route_id_name="departmentId" default_name="Create Category" src_name="" src_route_id="departmentId"></node>
+
+          <node name="CPanelCategoryView" action="AdminView" controller="Category" route_id_name="id" default_name="" src_name="categoryName" src_route_id="categoryId">
+            <node name="CPanelCategoryEdit" action="Edit" controller="Category" route_id_name="id" default_name="Edit Category" src_name="" src_route_id="categoryId"></node>
+            <node name="CPanelSubcategoryAdd" action="Create" controller="Subcategory" route_id_name="categoryId" default_name="Create Subcategory" src_name="" src_route_id="categoryId"></node>
+
+            <node name="CPanelSubcategoryView" action="AdminView" controller="Subcategory" route_id_name="id" default_name="" src_name="subcategoryName" src_route_id="subcategoryId">
+              <node name="CPanelSubcategoryEdit" action="Edit" controller="Subcategory" route_id_name="id" default_name="Edit Subcategory" src_name="" src_route_id="subcategoryId"></node>
+              <node name="CPanelProductDescriptionFields" action="EditProductDescriptionFields" controller="Subcategory" route_id_name="subcategoryId" default_name="Product Description Fields" src_name="" src_route_id="subcategoryId"></node>
+              <node name="CPanelProductAdd" action="Create" controller="Product" route_id_name="subcategoryId" default_name="Create Product" src_name="" src_route_id="subcategoryId"></node>
+
+              <node name="CPanelProductView" action="AdminView" controller="Product" route_id_name="id" default_name="" src_name="productName" src_route_id="productId">
+                <node name="CPanelProductEdit"  action="Edit" controller="Product" route_id_name="id" default_name="Edit Product" src_name="" src_route_id="productId"></node>
+
+              </node>
+            </node>
+          </node>
+        </node>
+      </node>
+
+      <node name="CPanelCustomersView" action="ManageCustomers" controller="User" route_id_name="" default_name="Customer Management" src_name="" src_route_id="">
+        <node name="CPanelCustomerEdit" action="Edit" controller="User" route_id_name="id" default_name="" src_name="userName" src_route_id="userId"></node>
+      </node>
+
+      <node name="CPanelEmployeesView" action="ManageEmployees" controller="User" route_id_name="" default_name="Employee Management" src_name="" src_route_id="">
+        <node name="CPanelEmployeeEdit" action="Edit" controller="User" route_id_name="id" default_name="" src_name="userName" src_route_id="userId"></node>
+      </node>
+      
+      <node name="CPanelOrdersView" action="ManageOrders" controller="Order" route_id_name="" default_name="Order Management" src_name="" src_route_id="">
+        <node name="CPanelOrderView" action="AdminView" controller="Order" route_id_name="id" default_name="Order Details" src_name="orderName" src_route_id="orderId">
+          <node name="CPanelOrderEdit" action="Edit" controller="Order" route_id_name="id" default_name="Edit Order" src_name="" src_route_id="orderId"></node>
+        </node>
+      </node>
+
+      <node name="CPanelBlogsView" action="ManageBlogs" controller="Blog" route_id_name="" default_name="Blog Management" src_name="" src_route_id="">
+        <node name="CPanelBlogAdd" action="Create" controller="Blog" route_id_name="" default_name="Create Blog" src_name="" src_route_id=""></node>
+        <node name="CPanelBlogView" action="AdminView" controller="Blog" route_id_name="id" default_name="" src_name="blogName" src_route_id="blogId">
+          <node name="CPanelBlogEdit" action="Edit" controller="Blog" route_id_name="id" default_name="Edit Blog" src_name="" src_route_id="blogId"></node>
+        </node>
+      </node>
+      
+    </node>
+
+  </bnb_root>
+</bnb_map>

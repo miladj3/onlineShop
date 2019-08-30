@@ -1,0 +1,71 @@
+﻿@model Blog
+
+@{
+    var actionName = (Model.Id == 0) ? "Create Blog" : "Edit Blog";
+    ViewData["Title"] = actionName;
+}
+
+<div class="container-light-thin">@Html.BreadcrumbNavRender()</div>
+
+<div class="container-fluid container-light bg-white">
+
+    <form asp-action="Save" asp-controller="Blog" method="post">
+
+        <div asp-validation-summary="All"></div>
+
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control maxw-500 w-100" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Markup"></label>
+            <textarea asp-for="Markup" class="form-control" id="rich-text-editor"></textarea>
+        </div>
+
+        <div class="form-group">
+            <input asp-for="IsPublished" class="form-check-inline" />
+            <label asp-for="IsPublished"></label>
+        </div>
+
+        <div class="form-group">
+            <input asp-for="IsPinned" class="form-check-inline" />
+            <label asp-for="IsPinned"></label>
+        </div>
+
+        <div class="form-group">
+            <input asp-for="DisplayDate" class="form-check-inline" />
+            <label asp-for="DisplayDate"></label>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="PreviewSize"></label>
+            <input asp-for="PreviewSize" class="form-control maxw-500" />
+        </div>
+
+        <input asp-for="Id" class="form-control" hidden />
+
+        <input type="submit" class="btn btn-success" value="Save" />
+
+    </form>
+
+    <hr />
+
+    <form id="uploadForm" name="upload" enctype="multipart/form-data" method="post">
+        <div class="control-area">
+            <div class="ctrl-upload">
+                <label class="d-block">Image Upload and Paste:</label>
+                <input id="filesToUpload" class="maxw-500 w-100" type="file" multiple onchange="uploadFiles();" />
+            </div>
+        </div>
+        <div id="filesUploaded" style="display:none;">
+            <a id="resetUploaded" href="javascript:;" class="btn btn-sm btn-danger">Close</a>
+        </div>
+    </form>
+
+</div>
+
+@section Scripts {
+    <script src="~/res/ckeditor/ckeditor.js"></script>
+    <script src="~/js/cpanel-rich-text-editor.js"></script>
+}

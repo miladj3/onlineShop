@@ -1,0 +1,54 @@
+﻿@model OrderDTO;
+
+@{
+    ViewData["Title"] = "Edit Order Details";
+}
+
+<form asp-action="Save" asp-controller="Order" method="post">
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <div class="container-light-thin">@Html.BreadcrumbNavRender()</div>
+
+        </div>
+
+        <div class="col-md-8">
+
+            <div class="container-fluid container-light bg-white mb-3">
+
+                <div asp-validation-summary="All"></div>
+
+                <h5>Delivery Details:</h5>
+
+                @Html.EditorForModel("DeliveryDetails")
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 pl-md-0">
+            <div class="container-fluid container-light bg-white">
+
+                <h5>Delivery Method:</h5>
+
+                @Html.EditorForModel("DeliveryMethod")
+
+                <h5>Payment Method:</h5>
+
+                @Html.EditorForModel("PaymentMethod")
+
+                <input asp-for="Id" hidden />
+                <button type="submit" class="btn btn-success btn-warning">Update</button>
+
+            </div>
+        </div>
+    </div>
+
+</form>
+
+@section Scripts {
+    <script src="~/js/cpanel-order-edit.js"></script>
+}
+

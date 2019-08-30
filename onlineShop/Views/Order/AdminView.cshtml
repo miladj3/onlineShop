@@ -1,0 +1,107 @@
+﻿@model OrderDTO
+
+@{
+    ViewData["Title"] = "Order Details";
+}
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <div class="container-light-thin">@Html.BreadcrumbNavRender()</div>
+
+    </div>
+
+    <div class="col-md-8">
+
+        <div class="container-light container-fluid bg-white mb-3">
+
+            <div class="mb-4">
+                <h5>Order Info</h5>
+                @Html.DisplayForModel("OrderInfo", Model)
+
+                @if (Model.LastModifiedByName != null)
+                {
+                    <div class="flex-preset-4">
+                        <span class="text-secondary pl-3">Last Change</span><span>@Model.LastModifiedOn.TryToLocalDateTime() <span>by</span> @Model.LastModifiedByName</span>
+                    </div>
+                }
+            </div>
+
+            <div class="mb-4">
+                <h5>Items</h5>
+                @Html.DisplayForModel("OrderItems", Model)
+            </div>
+
+            <div class="mb-4">
+                @Html.DisplayForModel("OrderTotals", Model)
+            </div>
+
+            <div class="mb-4">
+                <h5>Delivery Details</h5>
+                @Html.DisplayForModel("OrderDeliveryDetails", Model)
+            </div>
+
+            <div class="mb-4">
+                <h5>Payment Details</h5>
+                @Html.DisplayForModel("OrderPaymentDetails", Model)
+            </div>
+
+            <div class="mb-4">
+                <h5>Additional Info</h5>
+                @Html.DisplayForModel("OrderComment", Model)
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-md-4 pl-md-0">
+
+        <div class="container-light container-fluid bg-white mb-3">
+
+            <form asp-action="ChangeOrderStatus" asp-controller="Order" method="post" class="mb-3">
+
+                <div class="form-group">
+                    <label>Set Order Status</label>
+                    <select asp-for="@Model.Status" class="form-control" asp-items="@Html.GetEnumSelectList<OrderStatus>()"></select>
+                </div>
+
+                <input asp-for="@Model.Id" class="form-control" type="hidden" />
+
+                <button asp-action="ChangeOrderStatus" asp-controller="Order" class="btn btn-danger btn-sm">Update Status</button>
+
+            </form>
+
+            <div class="mb-3">
+                <a asp-action="Edit" asp-controller="Order" asp-route-id="@Model.Id" class="btn btn-warning btn-sm">Edit Order</a>
+            </div>
+
+            <div class="mb-3">
+                <a href="#order-changehistory" id="goto-order-changehistory" class="btn btn-success btn-sm">Show Change Log <i class="fa fa-arrow-circle-o-down"></i></a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        @{
+            var changeLogs = Model.ChangeHistory.Select(c => c.ChangeLog).ToList();
+        }
+
+        @await Html.PartialAsync("_ChangeHistory", changeLogs)
+
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#goto-order-changehistory').click(function () {
+                $('#collapse1').toggleClass('collapse show');
+            });
+        });
+    </script>
+}

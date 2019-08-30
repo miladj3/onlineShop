@@ -1,0 +1,22 @@
+﻿@page
+@model ErrorModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<div class="container-fluid container-light bg-white text-center">
+
+    <h5 class="text-danger"><i class="fa fa-exclamation-circle"></i> <span class="ml-2">Error</span></h5>
+    <hr />
+
+    <h5 class="text-danger mb-3">An error occurred while processing your request.</h5>
+    <p>Please try again later. If problem persists, <a asp-page="/Contact" class="link-alt">contact us to get help.</a></p>
+
+    @if (Model.ShowRequestId)
+    {
+        <p>
+            <span class="text-secondary fs08 mt-3">Your request ID: @Model.RequestId </span>
+        </p>
+    }
+
+</div>

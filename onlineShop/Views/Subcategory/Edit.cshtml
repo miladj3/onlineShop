@@ -1,0 +1,48 @@
+﻿@model SubcategoryViewModel
+
+@{ var actionName = (Model.Id == 0) ? "Create" : "Edit";
+    var actionButtonCaption = (Model.Id == 0) ? "Create" : "Save";
+    ViewData["Title"] = actionName + " Subcategory";}
+
+<div class="container-light-thin">@Html.BreadcrumbNavRender()</div>
+
+<div class="container-fluid container-light bg-white mb-3">
+
+    <form asp-action="Save" asp-controller="Subcategory" enctype="multipart/form-data" method="post">
+
+        <div asp-validation-summary="All"></div>
+
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control maxw-500" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control maxw-500"></textarea>
+        </div>
+
+        <input asp-for="Id" hidden />
+        <input asp-for="CategoryId" hidden />
+
+        <div class="form-group">
+            @if (Model.Picture != null)
+            {
+                @if (Model.Picture.Id != 0)
+                {
+                    <span>Current picture:</span>
+                    <div>
+                        <img src="@(Url.Content("~/") + Model.Picture.Path)" style="max-width:150px;max-height:150px;" />
+                    </div>
+                }
+            }
+            <input asp-for="PictureToUpload" type="file" class="form-control-file maxw-500" />
+        </div>
+
+        <button asp-action="Save" asp-controller="Subcategory" type="submit" class="btn btn-success">@actionButtonCaption</button>
+
+    </form>
+</div>
+
+
+

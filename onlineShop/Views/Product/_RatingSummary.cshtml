@@ -1,0 +1,28 @@
+﻿@model ProductViewModel
+
+<div class="product-rating-area">
+
+    <div alt="@Model.RatingOverall">
+
+        @for (var i = 1; i <= 6; i++)
+        {
+            if (Math.Floor(Model.RatingOverall) >= i)
+            {
+                <i class="fa fa-star fa-star-active fs12"></i>
+            }
+            else if ((i - Model.RatingOverall) < 0.9)
+            {
+                <i class="fa fa-star-half-empty fa-star-active fs12"></i>
+            }
+            else
+            {
+                <i class="fa fa-star fa-star-inactive fs12"></i>
+            }
+        }
+
+        <a href="javascript:;" onclick="gotoComments();">
+            <span class="text-secondary fs09">(@Model.RatingCount <i class="fa fa-thumbs-o-up"></i><i class="fa fa-thumbs-o-down"></i>, @Model.Comments.Count <i class="fa fa-comment-o"></i>)</span>
+        </a>
+
+    </div>
+</div>

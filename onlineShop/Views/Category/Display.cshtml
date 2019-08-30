@@ -1,0 +1,69 @@
+﻿@model CategoryViewModel
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="row">
+
+    @if (Model.Subcategories.Count == 0)
+    {
+        <div class="col-md-12 bg-white container-light h-100">
+            <span>This catalog department is empty.</span>
+        </div>
+    }
+    else
+    {
+        <div class="col-md-3 d-none d-lg-block d-md-block">
+            <div class="col-md-12 bg-white container-light h-100">
+
+                <h5 class="text-center">Subcategories</h5>
+                <hr />
+
+                @foreach (var subcat in Model.Subcategories)
+                {
+                    <div class="menu-item-link text-center">
+                        <a asp-controller="Subcategory" asp-action="Display" asp-route-id=@subcat.Id>@subcat.Name</a>
+                    </div>
+
+                }
+
+            </div>
+
+        </div>
+
+        <div class="col-md-9 pl-md-0">
+
+            <div class="container-light-thin">@Html.BreadcrumbNavRender()</div>
+
+            <div class="col-md-12 bg-white container-light">
+                <div class="row">
+
+                    @foreach (var subcat in Model.Subcategories)
+                    {
+                        <div class="col-md-4 px-2">
+                            <div class="productlist-item">
+
+                                <div>
+                                    <a class="link-default" asp-controller="Subcategory" asp-action="Display" asp-route-id=@subcat.Id>
+                                        <div class="productlist-img-container">
+                                            @if (subcat.Picture == null)
+                                            {
+                                                <img class="productlist-img" src="@Url.Content("~/images/no_image_available.png")" />
+                                            }
+                                            else
+                                            {
+                                                <img class="productlist-img" src="@(Url.Content("~/") + subcat.Picture.Path)" />
+                                            }
+                                        </div>
+                                        <div class="text-center">@subcat.Name</div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

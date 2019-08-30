@@ -1,0 +1,44 @@
+﻿@model OrderDTO
+
+<div class="pl-3">
+
+    <div class="table-row wrapper header">
+        <div class="wrapper flex-grow-1">
+            <div class="wrapper flex-grow-1">
+                <div class="table-cell-text">Product</div>
+                <div class="table-cell-text">Price</div>
+                <div class="table-cell-text">Quantity</div>
+                <div class="table-cell-text">Amount</div>
+            </div>
+        </div>
+    </div>
+
+    @foreach (var item in Model.Items)
+    {
+        <div class="table-row wrapper">
+            <div class="wrapper flex-grow-1">
+
+                <div class="wrapper flex-grow-1">
+
+                    <div class="table-cell-text">
+                        <a href="@Url.Action("Display", "Product", new { id = item.Product.Id })">@item.Product.Name.SetLengthLimit(50)</a>
+                    </div>
+
+                    <div class="table-cell-text">
+                        @item.Product.Price PLN
+                    </div>
+
+                    <div class="table-cell-text">
+                        @item.Quantity
+                    </div>
+
+                    <div class="table-cell-text">
+                        @item.Amount PLN
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

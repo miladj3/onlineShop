@@ -1,0 +1,54 @@
+﻿@model List<Blog>
+
+@{ ViewData["Title"] = "Manage Blogs"; }
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css" />
+<link rel="stylesheet" href="~/res/toastr/toastr.css" />
+
+<div class="container-light-thin">@Html.BreadcrumbNavRender()</div>
+
+<div class="container-fluid container-light bg-white">
+    <table class="table table-striped" id="blogTable">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Status</th>
+                <th class="d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">Added On</th>
+                <th class="d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">Added By</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var blog in Model)
+            {
+
+                var status = blog.IsPublished ? "Published" : "Not Published";
+                var statusDisplayClass = blog.IsPublished ? "text-success" : "text-danger";
+
+                <tr>
+                    <td>@blog.Id</td>
+                    <td><a asp-controller="Blog" asp-action="AdminView" asp-route-id="@blog.Id" class="link-alt">@blog.Title</a></td>
+                    <td class="@statusDisplayClass">@status</td>
+                    <td class="d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">@blog.AddedOn.ToLocalTime()</td>
+                    <td class="d-none d-sm-none d-md-table-cell d-xl-table-cell d-lg-table-cell">@blog.AddedBy</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="control-area">
+        <a asp-action="Create" asp-controller="Blog" class="btn btn-success">Create</a>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.js"></script>
+    <script src="~/res/toastr/toastr.min.js"></script>
+    <script src="~/js/toastr-custom-settings.js"></script>
+    <script src="~/js/cpanel-entity-datatables.js"></script>
+
+    <script>
+        InitTableForEntity('BlogsAll');
+    </script>
+}

@@ -1,0 +1,45 @@
+﻿@model List<ChangeLog>
+
+<div class="container-light container-fluid bg-white">
+
+    <div id="order-changehistory">
+        <div class="text-center">
+            <button class="btn btn-link ml-auto" style="align-self:center;" data-toggle="collapse" data-target="#collapse1">
+                <i class="fa fa-arrow-circle-down"></i> Change Log
+            </button>
+        </div>
+
+        <div id="collapse1" class="collapse hide" data-parent="#order-changehistory">
+
+            <div class="container-fluid">
+
+                <div class="table-row header">
+                    <div class="wrapper">
+                        <div class="table-cell-text">Entity</div>
+                        <div class="table-cell-text">Property</div>
+                        <div class="table-cell-text">Old Value</div>
+                        <div class="table-cell-text">New Value</div>
+                        <div class="table-cell-text">Timestamp</div>
+                        <div class="table-cell-text">User</div>
+                    </div>
+                </div>
+
+                @foreach (var changeLog in Model)
+                {
+                    <div class="table-row table-border-exc-last">
+                        <div class="wrapper">
+
+                            <div class="table-cell-text">@changeLog.EntityName</div>
+                            <div class="table-cell-text">@changeLog.PropertyName</div>
+                            <div class="table-cell-text">@changeLog.OldValue</div>
+                            <div class="table-cell-text">@changeLog.NewValue</div>
+                            <div class="table-cell-text">@changeLog.DateChanged.ToLocalTime()</div>
+                            <div class="table-cell-text">@changeLog.Employee.Email</div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

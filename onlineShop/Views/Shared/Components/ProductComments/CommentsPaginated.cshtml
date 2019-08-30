@@ -1,0 +1,62 @@
+﻿@model PaginatedList<ProductComment>
+
+<div class="container">
+
+    @{ var pluralEnding = (ViewBag.CommentsTotal > 0) ? "s" : ""; }
+
+    <span class="text-secondary font-italic fs09 d-block mb-2">@ViewBag.CommentsTotal person<span>@pluralEnding</span> commented on this product.</span>
+
+    @if (Model.Count == 0)
+    {
+        <span>Be the first who left the comment! :)</span>
+    }
+    else
+    {
+        foreach (var comm in Model)
+        {
+            <div class="product-comment">
+
+                <div>
+                    @{ var userName = comm.IsPostedByGuest ? comm.GuestUserName : comm.Customer.Firstname; }
+
+                    <span>@userName</span>
+
+                    <span class="ml-1">
+                        @if (comm.RatingValue > 0)
+                        {
+                            @for (var i = 1; i <= 6; i++)
+                            {
+                                if (comm.RatingValue >= i)
+                                {
+                                    <i class="fa fa-star fa-star-active fs12"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa fa-star fa-star-inactive fs12"></i>
+                                }
+                            }
+                        }
+
+                        @if (comm.IsVerifiedPurchase)
+                        {
+                            <span class="text-success fs08"><i class="fa fa-check">Confirmed Purchase</i></span>
+                        }
+                    </span>
+                </div>
+
+                @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+                {
+                    <div class="float-right">
+                        <a href="javascript:;" class="ctrl-item-delete" data-itemId="@comm.Id" data-itemType="comment"><i class="fa fa-remove text-danger"></i></a>
+                    </div>
+                }
+
+                <div class="text-secondary fs08"> @comm.DateAdded.ToLocalTime() </div>
+                <div class="text-wrap-f">@comm.Text</div>
+            </div>
+        }
+    }
+
+    @await Html.PartialAsync("/Views/Product/_CommentPagination.cshtml", Model)
+
+</div>

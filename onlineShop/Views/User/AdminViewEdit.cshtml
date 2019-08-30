@@ -1,0 +1,170 @@
+﻿@model UserViewModel
+
+@{ ViewData["Title"] = "Edit User"; }
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        @{ var parentContrName = Model.IsCustomer ? "ManageCustomers" : "ManageEmployees"; }
+
+        <div class="container-light-thin">@Html.BreadcrumbNavRender()</div>
+
+        <form asp-action="Save" asp-controller="User" method="post">
+
+            <div class="row">
+
+                <div class="col-md-4">
+
+                    <div class="container-fluid container-light bg-white mb-3">
+
+                        <h5 class="mb-3">User Details</h5>
+
+                        @if (Model.IsCustomer && Model.AllowRoleChange)
+                        {
+                            <a href="javascript:;" class="btn btn-outline-danger btn-sm" id="ctrl-show-role-area">Add Roles</a>
+                        }
+
+                        <div asp-validation-summary="All" class="text-danger"></div>
+
+                        <div class="form-group">
+                            <label asp-for="@Model.Email"></label>
+                            <input asp-for="@Model.Email" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="@Model.Firstname"></label>
+                            <input asp-for="@Model.Firstname" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="@Model.Lastname"></label>
+                            <input asp-for="@Model.Lastname" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <input asp-for="@Model.EmailConfirmed" type="checkbox" class="form-check-inline" />
+                            <label asp-for="@Model.EmailConfirmed"></label>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="@Model.PhoneNumber"></label>
+                            <input asp-for="@Model.PhoneNumber" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="@Model.RegisteredOn"></label>
+                            <input disabled value="@Model.RegisteredOn" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <input asp-for="@Model.IsBlocked" type="checkbox" class="form-check-inline ctrl-block-input" />
+                            <label asp-for="@Model.IsBlocked" class="text-danger ctrl-block-input"></label>
+                        </div>
+
+                        <input asp-for="@Model.UserId" hidden />
+
+                        <button type="submit" class="btn btn-warning" id="ctrl-form-submit">Save Changes</button>
+                        <span class="text-danger" style="display:none;" id="msg-warning">NOTE: User Roles Have Been Modified!</span>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-8 pl-md-0">
+
+                    @{ var userRolesDisplayAttr = (Model.IsCustomer) ? "none" : "block"; }
+
+                    <div class="container-fluid container-light bg-white mb-3" id="user-roles-area" style="display:@userRolesDisplayAttr">
+
+                        <h5 class="mb-3">User Roles</h5>
+
+                        <div class="form-group">
+                            <ul class="list-unstyled">
+
+                                @for (var i = 0; i < Model.Roles.Count; i++)
+                                {
+                                    <li>
+                                        @if (Model.AllowRoleChange)
+                                        {
+                                            <input asp-for="@Model.Roles[i].IsAssigned" type="checkbox" class="form-check-inline ctrl-role-input" />
+                                        }
+                                        else
+                                        {
+                                            <input asp-for="@Model.Roles[i].IsAssigned" type="checkbox" class="form-check-inline ctrl-role-input" disabled />
+                                        }
+                                        <input asp-for="@Model.Roles[i].Rolename" hidden />
+
+                                        <label class="text-">@Model.Roles[i].Rolename</label>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+
+                    @if (Model.IsCustomer)
+                    {
+
+                        <div class="container-fluid container-light bg-white mb-3">
+
+                            <h5 class="mb-3">Orders</h5>
+
+                            @if (Model.Orders.Count > 0)
+                            {
+                                <table class="table table-striped entity-datatable" id="entityDatatable">
+
+                                    <thead>
+
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Created On</th>
+                                            <th>Status</th>
+                                            <th>Last Updated On</th>
+                                            <th>Last Updated By</th>
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody>
+
+                                        @foreach (var order in Model.Orders)
+                                        {
+                                            <tr>
+                                                <td>@order.Id</td>
+                                                <td><a asp-action="AdminView" asp-controller="Order" asp-route-id="@order.Id">@order.CreatedOn</a></td>
+                                                <td>@order.Status</td>
+                                                <td>@order.LastModifiedOn.TryToLocalDateTime()</td>
+                                                <td>@order.LastModifiedBy</td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+
+                                </table>
+                            }
+                            else
+                            {
+                                <span>No orders found for this user.</span>
+                            }
+
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </form>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                @await Html.PartialAsync("_ChangeHistory", Model.ChangeHistory)
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/cpanel-user-edit.js"></script>
+}

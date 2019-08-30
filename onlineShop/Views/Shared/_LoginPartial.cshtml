@@ -1,0 +1,46 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="pl-2 pr-2">
+            <a asp-action="Index" asp-controller="ControlPanel" class="text-nowrap nav-item-link text-warning">
+                <i class="fa fa-cogs"></i><span class="nav-item-caption"> CPanel</span>
+            </a>
+        </div>
+    }
+
+    <div class="pl-2 pr-2">
+        <a asp-area="Identity" asp-page="/Account/Manage/Index" class="text-nowrap nav-item-link">
+            <i class="fa fa-user-o"></i>
+            <span class="nav-item-caption"> @((await UserManager.GetUserAsync(User)).Firstname)</span>
+        </a>
+    </div>
+
+    <div class="pl-2 pr-2">
+        <form asp-area="Identity" asp-page="/Account/Logout" method="post" id="logoutForm">
+            <button type="submit" class="text-nowrap nav-item-button">
+                <i class="fa fa-sign-out"></i><span class="text-nowrap nav-item-caption"> Log Out</span>
+            </button>
+        </form>
+    </div>
+
+}
+else
+{
+    <div class="pl-2 pr-2">
+        <a asp-area="Identity" asp-page="/Account/Register" class="text-nowrap nav-item-link">
+            <i class="fa fa-user-plus"></i><span class="text-nowrap nav-item-caption"> Sign Up</span>
+        </a>
+    </div>
+    <div class="pl-2 pr-2">
+        <a asp-area="Identity" asp-page="/Account/Login" class="text-nowrap nav-item-link">
+            <i class="fa fa-sign-in"></i><span class="text-nowrap nav-item-caption"> Log In</span>
+        </a>
+    </div>
+}

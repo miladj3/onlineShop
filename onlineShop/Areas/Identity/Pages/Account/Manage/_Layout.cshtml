@@ -1,0 +1,31 @@
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <div class="container-fluid container-light bg-white mb-3">
+        <h5>Your Account Settings</h5>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="container-fluid container-light bg-white mb-3">
+                <partial name="_ManageNav" />
+            </div>
+        </div>
+
+        <div class="col-md-9  pl-md-0">
+            <div class="container-fluid container-light bg-white">
+                <noindex>
+                    @RenderBody()
+                </noindex>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

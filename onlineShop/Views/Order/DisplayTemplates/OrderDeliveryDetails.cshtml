@@ -1,0 +1,58 @@
+﻿@model OrderDTO
+
+<div class="flex-preset-4 flex-wrap pl-3">
+    <span class="text-secondary">Delivery Method</span><span>@HtmlExtensions.EnumDisplayNameFor(Model.DeliveryDetails.DeliveryMethodType)</span>
+</div>
+
+@if (Model.NoUserAccount)
+{
+    <div class="flex-preset-4 flex-wrap pl-3">
+        <span class="text-secondary">Email</span><span>@Model.DeliveryDetails.Email</span>
+    </div>
+}
+
+<div class="flex-preset-4 flex-wrap pl-3">
+    <span class="text-secondary">Firstname</span><span>@Model.DeliveryDetails.Firstname</span>
+</div>
+<div class="flex-preset-4 flex-wrap pl-3">
+    <span class="text-secondary">Lastname</span><span>@Model.DeliveryDetails.Lastname</span>
+</div>
+<div class="flex-preset-4 flex-wrap pl-3">
+    <span class="text-secondary">Phone Number</span><span>@Model.DeliveryDetails.PhoneNumber</span>
+</div>
+
+@if (Model.DeliveryDetails.DeliveryMethodType == DeliveryMethodType.Courier)
+{
+    <div class="flex-preset-4 flex-wrap pl-3">
+        <span class="text-secondary">Street</span><span>@Model.DeliveryDetails.Street</span>
+    </div>
+    <div class="flex-preset-4 flex-wrap pl-3">
+        <span class="text-secondary">Building</span><span>@Model.DeliveryDetails.Building</span>
+    </div>
+    <div class="flex-preset-4 flex-wrap pl-3">
+        <span class="text-secondary">Appartment</span><span>@Model.DeliveryDetails.Appartment</span>
+    </div>
+    <div class="flex-preset-4 flex-wrap pl-3">
+        <span class="text-secondary">Postal Code</span><span>@Model.DeliveryDetails.PostalCode</span>
+    </div>
+    <div class="flex-preset-4 flex-wrap pl-3">
+        <span class="text-secondary">City</span><span>@Model.DeliveryDetails.City</span>
+    </div>
+    <div class="flex-preset-4 flex-wrap pl-3">
+        <span class="text-secondary">Country</span> <span>@Model.DeliveryDetails.Country</span>
+    </div>
+}
+
+@if (Model.DeliveryDetails.DeliveryMethodType == DeliveryMethodType.Store)
+{
+    <div class="flex-preset-4 flex-wrap pl-3">
+        <span class="text-secondary">Shop Code</span><span>@Model.DeliveryDetails.StoreCode</span>
+    </div>
+}
+
+@if (Model.DeliveryDetails.DeliveryMethodType == DeliveryMethodType.Locker)
+{
+    <div class="flex-preset-4 flex-wrap pl-3">
+        <span class="text-secondary">Parcel Locker Code</span><span>@Model.DeliveryDetails.ParcelLockerCode</span>
+    </div>
+}
