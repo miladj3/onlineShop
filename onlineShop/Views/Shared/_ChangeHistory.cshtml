@@ -4,7 +4,7 @@
 
     <div id="order-changehistory">
         <div class="text-center">
-            <button class="btn btn-link ml-auto" style="align-self:center;" data-toggle="collapse" data-target="#collapse1">
+            <button class="btn btn-link ml-auto align-self-center" data-toggle="collapse" data-target="#collapse1">
                 <i class="fa fa-arrow-circle-down"></i> Change Log
             </button>
         </div>
@@ -13,30 +13,37 @@
 
             <div class="container-fluid">
 
-                <div class="table-row header">
-                    <div class="wrapper">
-                        <div class="table-cell-text">Entity</div>
-                        <div class="table-cell-text">Property</div>
-                        <div class="table-cell-text">Old Value</div>
-                        <div class="table-cell-text">New Value</div>
-                        <div class="table-cell-text">Timestamp</div>
-                        <div class="table-cell-text">User</div>
-                    </div>
-                </div>
-
-                @foreach (var changeLog in Model)
+                @if (Model.Count == 0)
                 {
-                    <div class="table-row table-border-exc-last">
-                        <div class="wrapper">
-
-                            <div class="table-cell-text">@changeLog.EntityName</div>
-                            <div class="table-cell-text">@changeLog.PropertyName</div>
-                            <div class="table-cell-text">@changeLog.OldValue</div>
-                            <div class="table-cell-text">@changeLog.NewValue</div>
-                            <div class="table-cell-text">@changeLog.DateChanged.ToLocalTime()</div>
-                            <div class="table-cell-text">@changeLog.Employee.Email</div>
+                    <span class="text-secondary">No records to display.</span>
+                }
+                else
+                {
+                    <div class="table-row header">
+                        <div class="wrapper flex-grow-1">
+                            <div class="table-cell-text">Entity</div>
+                            <div class="table-cell-text">Property</div>
+                            <div class="table-cell-text">Old Value</div>
+                            <div class="table-cell-text">New Value</div>
+                            <div class="table-cell-text">Timestamp</div>
+                            <div class="table-cell-text">User</div>
                         </div>
                     </div>
+
+                    @foreach (var changeLog in Model)
+                    {
+                        <div class="table-row table-border-exc-last">
+                            <div class="wrapper flex-grow-1">
+
+                                <div class="table-cell-text">@changeLog.EntityName</div>
+                                <div class="table-cell-text">@changeLog.PropertyName</div>
+                                <div class="table-cell-text">@changeLog.OldValue</div>
+                                <div class="table-cell-text">@changeLog.NewValue</div>
+                                <div class="table-cell-text">@changeLog.DateChanged.ToLocalTime()</div>
+                                <div class="table-cell-text">@changeLog.Employee.Email</div>
+                            </div>
+                        </div>
+                    }
                 }
 
             </div>

@@ -25,13 +25,13 @@
                     <div class="sp-wrap">
                         @if (Model.Pictures.Count == 0)
                         {
-                        <a href="@Url.Content("~/images/no_image_available.png")"><img src="@Url.Content("~/images/no_image_available.png")" alt=""></a>
+                            <a href="@Url.Content("~/images/no_image_available.png")"><img src="@Url.Content("~/images/no_image_available.png")" alt=""></a>
                         }
                         else
                         {
-                        @foreach (var pic in Model.Pictures)
+                            @foreach (var pic in Model.Pictures)
                             {
-                        <a href="@(Url.Content("~/")+ pic.Path)"><img src="@(Url.Content("~/")+ pic.Path)" alt="Product Picture"></a>
+                                <a href="@(Url.Content("~/")+ pic.Path)"><img src="@(Url.Content("~/")+ pic.Path)" alt="Product Picture"></a>
                             }
                         }
                     </div>
@@ -54,9 +54,9 @@
                             @* Short description *@
                             @foreach (var descItem in Model.ProductDescriptionItems)
                             {
-                            @if (descItem.Field.DisplayInItemPreview)
+                                @if (descItem.Field.DisplayInItemPreview)
                                 {
-                            <li class="list-unstyled">@descItem.Field.Name : @descItem.Value </li>
+                                    <li class="list-unstyled">@descItem.Field.Name : @descItem.Value </li>
                                 }
                             }
 
@@ -78,37 +78,37 @@
 
             @if (Model.IsAvailable)
             {
-            @* Purchase action area *@
-            <div class="text-success text-nowrap text-center fw600">In stock. @Model.NumberInStock items left.</div>
+                @* Purchase action area *@
+                <div class="text-success text-nowrap text-center fw600">In stock. @Model.NumberInStock items left.</div>
 
-            <div class="input-group justify-content-center flex-nowrap mt-2">
-                <div class="input-group-prepend">
-                    <input type="text" id="add-quantity" value="1" class="btn-group text-center" />
+                <div class="input-group justify-content-center flex-nowrap mt-2">
+                    <div class="input-group-prepend">
+                        <input type="text" id="add-quantity" value="1" class="btn-group text-center" />
+                    </div>
+                    <div class="input-group-append">
+                        <button class="btn btn-success btn-group" data-product-id="@Model.Id" id="add-to-cart"><span><i class="fa fa-cart-plus mr-2"></i></span> Add to Cart</button>
+                    </div>
                 </div>
-                <div class="input-group-append">
-                    <button class="btn btn-success btn-group" data-product-id="@Model.Id" id="add-to-cart"><span><i class="fa fa-cart-plus mr-2"></i></span> Add to Cart</button>
-                </div>
-            </div>
             }
             else
             {
-            <div class="text-danger text-nowrap text-center fw600">Out of stock.</div>
+                <div class="text-danger text-nowrap text-center fw600">Out of stock.</div>
 
-            @* Product availability notificaiton subscription *@
-            <div id="product-notification-area" data-guest-user="@Model.NoUserAccount" data-product-id="@Model.Id">
-                @if (!Model.IsWatchedByUser)
+                @* Product availability notificaiton subscription *@
+                <div id="product-notification-area" data-guest-user="@Model.NoUserAccount" data-product-id="@Model.Id">
+                    @if (!Model.IsWatchedByUser)
                     {
-                <a href="javascript:;" id="product-inform-available" class="text-warning text-center d-block mt-2" data-action="add">
-                    <i class="fa fa-info-circle"></i> Inform when available
-                </a>
+                        <a href="javascript:;" id="product-inform-available" class="text-warning text-center d-block mt-2" data-action="add">
+                            <i class="fa fa-info-circle"></i> Inform when available
+                        </a>
                     }
                     else
                     {
-                <a href="javascript:;" id="product-inform-available" class="text-success text-center d-block mt-2" data-action="remove">
-                    <i class="fa fa-check"></i> In watchlist
-                </a>
+                        <a href="javascript:;" id="product-inform-available" class="text-success text-center d-block mt-2" data-action="remove">
+                            <i class="fa fa-check"></i> In watchlist
+                        </a>
                     }
-            </div>
+                </div>
             }
 
         </div>
@@ -128,9 +128,9 @@
 
                 @if (!String.IsNullOrEmpty(Model.ExtendedDescriptionMarkup))
                 {
-                <li class="nav-item" id="product-full-description">
-                    <a class="nav-link" href="#full-description" data-toggle="tab" role="tab">Full Description</a>
-                </li>
+                    <li class="nav-item" id="product-full-description">
+                        <a class="nav-link" href="#full-description" data-toggle="tab" role="tab">Full Description</a>
+                    </li>
                 }
                 <li class="nav-item" id="product-comments" data-product-id="@Model.Id">
                     <a class="nav-link" href="#comments" data-toggle="tab" role="tab">Comments</a>
@@ -145,10 +145,10 @@
 
                         @foreach (var descItem in Model.ProductDescriptionItems)
                         {
-                        <div class="flex-preset-6">
-                            <span class="pl-5 text-secondary-dark fw600 flex-1">@descItem.Field.Name</span>
-                            <span class="pr-5 flex-1">@descItem.Value</span>
-                        </div>
+                            <div class="flex-preset-6">
+                                <span class="pl-5 text-secondary-dark fw600 flex-1">@descItem.Field.Name</span>
+                                <span class="pr-5 flex-1">@descItem.Value</span>
+                            </div>
                         }
 
                     </div>
@@ -166,49 +166,52 @@
                 <div class="tab-pane pl-3" id="comments" role="tabpanel">
 
                     <div class="row mt-3">
-                        <div class="col-md-6">
 
-                            @* Product Comments *@
-                            <div class="product-comment-content">
+                            <div class="col-md-6">
 
-                                @await Component.InvokeAsync("ProductComments", new { allComments = Model.Comments, pages = 1 })
+                                @* Product Comments *@
+                                <div id="published-comments" data-product-id="@Model.Id">
 
-                            </div>
+                                    <div class="spinner-border" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
 
-                        </div>
-
-                        <div class="col-md-6" id="comment-area">
-
-                            @* Product Rating *@
-                            @if (!Model.IsRatedByUser)
-                            {
-                            <div class="product-rating-input" data-rating-value="0">
-
-                                <div class="mt-2">Rate product:</div>
-
-                                <i class="product-rating-control fa fa-star fs12" value="1"></i>
-                                <i class="product-rating-control fa fa-star fs12" value="2"></i>
-                                <i class="product-rating-control fa fa-star fs12" value="3"></i>
-                                <i class="product-rating-control fa fa-star fs12" value="4"></i>
-                                <i class="product-rating-control fa fa-star fs12" value="5"></i>
-                                <i class="product-rating-control fa fa-star fs12" value="6"></i>
+                                </div>
 
                             </div>
-                            }
 
+                            <div class="col-md-6" id="comment-area">
 
-                            <div class="product-comment-input mt-1">
-
-                                @if (!User.Identity.IsAuthenticated)
+                                @* Product Rating *@
+                                @if (!Model.IsRatedByUser)
                                 {
-                                <input class="form-control d-block mb-2" maxlength="50" placeholder="Your name..." id="product-comment-guest-name" style="max-width: 500px; " />
+                                    <div class="product-rating-input" data-rating-value="0">
 
+                                        <div class="mt-2">Rate product:</div>
+
+                                        <i class="product-rating-control fa fa-star fs12" value="1"></i>
+                                        <i class="product-rating-control fa fa-star fs12" value="2"></i>
+                                        <i class="product-rating-control fa fa-star fs12" value="3"></i>
+                                        <i class="product-rating-control fa fa-star fs12" value="4"></i>
+                                        <i class="product-rating-control fa fa-star fs12" value="5"></i>
+                                        <i class="product-rating-control fa fa-star fs12" value="6"></i>
+
+                                    </div>
                                 }
 
-                                <textarea class="form-control d-block" maxlength="500" placeholder="Your feedback/question?" id="product-comment-text" style="max-width: 500px; min-height: 200px;"></textarea>
-                                <button class="btn btn-danger btn-sm d-block mt-2" data-product-id="@Model.Id" id="product-comment-submit" style="max-width: 300px;">Submit</button>
+                                <div class="product-comment-input mt-1">
+
+                                    @if (!User.Identity.IsAuthenticated)
+                                    {
+                                        <input class="form-control d-block mb-2" maxlength="50" placeholder="Your name..." id="product-comment-guest-name" style="max-width: 500px; " />
+
+                                    }
+
+                                    <textarea class="form-control d-block" maxlength="500" placeholder="Your feedback/question?" id="product-comment-text" style="max-width: 500px; min-height: 200px;"></textarea>
+                                    <button class="btn btn-danger btn-sm d-block mt-2" data-product-id="@Model.Id" id="product-comment-submit" style="max-width: 300px;">Submit</button>
+                                </div>
                             </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -264,11 +267,8 @@
 
 @section Scripts {
     <script src="~/res/smoothproducts/smoothproducts.js"></script>
-
     <script src="~/res/toastr/toastr.min.js"></script>
     <script src="~/js/toastr-custom-settings.js"></script>
-
     <script src="~/js/product-display.js"></script>
     <script src="~/js/cpanel-comment-delete-modal.js"></script>
-
 }

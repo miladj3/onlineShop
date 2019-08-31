@@ -329,6 +329,10 @@ a.link-alt {
     justify-content: center;
 }
 
+.flex-basis-100 {
+    flex-basis: 100%;
+}
+
 .flex-preset-1 {
     display: flex;
     justify-content: space-between;

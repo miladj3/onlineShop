@@ -110,6 +110,21 @@ namespace onlineShop.Controllers.API
             return Ok();
         }
 
+        [Authorize(Roles = "Manager, Admin")]
+        [HttpPost("/API/Products/Comments/Publish/{commentId}")]
+        public IActionResult PublishComment([FromRoute] int commentId)
+        {
+            var comment = _productRepository.GetProductCommentById(commentId);
+
+            if (comment == null)
+                return BadRequest("Comment not found");
+
+            comment.IsPublished = true;
+            _productRepository.SaveChanges();
+
+            return Ok();
+        }
+
         [HttpPost("/API/Products/Comments/Add/{productId}/{rating}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddProductComment([FromRoute] int productId, [FromRoute] int rating, [FromBody] JObject comment)
@@ -171,8 +186,8 @@ namespace onlineShop.Controllers.API
                 Text = commentText,
                 Product = prod,
                 RatingValue = rating,
-                // check if user previously purchased this item
-                IsVerifiedPurchase = _productRepository.ProductWasOrderedByUser(productId, userId)
+                IsPublished = false, // await moderation before publishing
+                IsVerifiedPurchase = _productRepository.ProductWasOrderedByUser(productId, userId) // check if user previously purchased this item
             };
 
             _productRepository.AddProductComment(comm);

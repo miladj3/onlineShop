@@ -2,9 +2,9 @@
 
 <div class="container">
 
-    @{ var pluralEnding = (ViewBag.CommentsTotal > 0) ? "s" : ""; }
+    @{ var pluralEnding = (Model.ItemsTotal > 0) ? "s" : ""; }
 
-    <span class="text-secondary font-italic fs09 d-block mb-2">@ViewBag.CommentsTotal person<span>@pluralEnding</span> commented on this product.</span>
+    <span class="text-secondary font-italic fs09 d-block mb-2">@Model.ItemsTotal person<span>@pluralEnding</span> commented on this product.</span>
 
     @if (Model.Count == 0)
     {

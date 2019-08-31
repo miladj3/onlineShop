@@ -91,13 +91,21 @@ namespace onlineShop.Repositories
             return _context.ProductComments.FirstOrDefault(c => c.Id == id);
         }
 
-        public List<ProductComment> GetProductCommentsByProductId(int productId)
+        public IQueryable<ProductComment> FetchProductCommentsPublishedByProductId(int productId)
         {
             return _context.ProductComments
                 .Include(c => c.Customer)
-                .Where(c => c.ProductId == productId)
-                .OrderByDescending(c => c.DateAdded)
-                .ToList();
+                .Where(c => c.ProductId == productId && c.IsPublished)
+                .OrderByDescending(c => c.DateAdded);
+        }
+
+        public IQueryable<ProductComment> FetchProductCommentsAllPending()
+        {
+            return _context.ProductComments
+                .Include(c => c.Customer)
+                .Include(c => c.Product)
+                .Where(c => !c.IsPublished)
+                .OrderByDescending(c => c.DateAdded);
         }
 
         public void AddProductComment(ProductComment comment)

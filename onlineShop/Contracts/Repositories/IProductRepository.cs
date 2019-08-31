@@ -14,7 +14,8 @@ namespace onlineShop.Repositories
         IQueryable<Product> FetchAllProductsIncl();
         IQueryable<Product> FetchProductsActiveInclBySubcatId(int subcategoryId);
         ProductComment GetProductCommentById(int id);
-        List<ProductComment> GetProductCommentsByProductId(int productId);
+        IQueryable<ProductComment> FetchProductCommentsPublishedByProductId(int productId);
+        IQueryable<ProductComment> FetchProductCommentsAllPending();
         List<ProductDescriptionItem> GetProductDescItemsByProductId(int productId);
         Product GetProductInclById(int id);
         Product GetProductById(int id);

@@ -3,6 +3,8 @@ Online shop with common functionalities based on ASP NET Core 2.1 with EntityFra
 
 **Demo:**
 https://onlineshop20190817043554.azurewebsites.net/
+(user account with limited access to Admin Panel: 
+login/ adm_onlineShop@wp.pl, password/ Demo2019!)
 
 **Front-End Frameworks & Libraries Used:**
 - Bootstrap 4.3.1

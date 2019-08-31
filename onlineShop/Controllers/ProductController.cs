@@ -27,6 +27,8 @@ namespace onlineShop.Controllers
         private readonly IDepartmentRepository _departmentRepository;
         private readonly IAuditTrailService _auditTrailService;
 
+        private const int commentsPerPage = 5;
+
         public ProductController(
             UserManager<AppUser> userManager,
             IFileUploader uploader,
@@ -72,27 +74,51 @@ namespace onlineShop.Controllers
         }
 
         [HttpGet("/Catalog/Product/{id}/Comments/{pages}")]
-        public IActionResult GetComments(int id, int pages)
+        public async Task<IActionResult> GetComments(int id, int pages)
         {
-            var comments = _productRepository.GetProductCommentsByProductId(id);
+            var publishedComments = _productRepository.FetchProductCommentsPublishedByProductId(id);
+            var publishedCommentsPaginated = await PaginatedList<ProductComment>.CreateAsync(publishedComments, pages, commentsPerPage);
 
-            return ViewComponent("ProductComments", new { allComments = comments, pages = pages });
+            return PartialView("_PublishedComments", publishedCommentsPaginated);
+
+            //return ViewComponent("ProductComments", new { allComments = comments, pages = pages });
         }
 
         [HttpGet("/Catalog/Product/{id}/RatingSummary/")]
         public IActionResult GetRatingSummary(int id)
         {
-            var comments = _productRepository.GetProductCommentsByProductId(id);
-
             var vm = new ProductViewModel()
             {
-                Comments = comments
+                Comments = _productRepository.FetchProductCommentsPublishedByProductId(id).ToList()
             };
 
             return PartialView("_RatingSummary", vm);
         }
 
         // ------------------------------------- ADMIN PANEL AREA: PRODUCT -------------------------------------------
+
+        [Authorize(Roles = "Admin, Manager")]
+        [HttpGet("/ControlPanel/GetPendingComments/{pages}")]
+        public async Task<IActionResult> GetPendingComments(int id, int pages)
+        {
+            var comments = _productRepository.FetchProductCommentsAllPending();
+            var commentsPaginated = await PaginatedList<ProductComment>.CreateAsync(comments, pages, commentsPerPage);
+
+            return PartialView("_PendingComments", commentsPaginated);
+        }
+
+        [Authorize(Roles = "Admin, Manager")]
+        [HttpGet("ControlPanel/PendingComments/")]
+        public IActionResult ManagePendingComments()
+        {
+            //var comments = _productRepository.FetchProductCommentsAllPending();
+            //var commentsPaginated = await PaginatedList<ProductComment>.CreateAsync(comments, pages, commentsPerPage);
+
+            _breadcrumbNavBuilder.CreateForNode("CPanelPendingCommentsView", new { }, this);
+
+            //return View(commentsPaginated);
+            return View();
+        }
 
         [Authorize(Roles = "Admin, Manager")]
         [HttpGet("/ControlPanel/Products/{id}")]

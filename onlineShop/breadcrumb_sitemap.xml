@@ -58,6 +58,9 @@
         <node name="CPanelCustomerEdit" action="Edit" controller="User" route_id_name="id" default_name="" src_name="userName" src_route_id="userId"></node>
       </node>
 
+      <node name="CPanelPendingCommentsView" action="ManagePendingComments" controller="Product" route_id_name="" default_name="Pending Comments" src_name="" src_route_id="">
+      </node>
+
       <node name="CPanelEmployeesView" action="ManageEmployees" controller="User" route_id_name="" default_name="Employee Management" src_name="" src_route_id="">
         <node name="CPanelEmployeeEdit" action="Edit" controller="User" route_id_name="id" default_name="" src_name="userName" src_route_id="userId"></node>
       </node>

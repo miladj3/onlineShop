@@ -1,0 +1,29 @@
+﻿@{ ViewData["Title"] = "Pending Product Comments"; }
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <div class="container-light-thin">@Html.BreadcrumbNavRender()</div>
+
+    </div>
+
+    <div class="col-md-12">
+
+        <div class="container-fluid container-light bg-white">
+
+            <h5 class="mb-3">Pending Product Comments:</h5>
+         
+            <div id="comment-list">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section  Scripts{ 
+    <script src="~/js/product-comment-validate.js"></script>
+}

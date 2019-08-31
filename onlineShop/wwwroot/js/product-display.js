@@ -4,6 +4,12 @@ $(window).on('load', function () {
     $('.sp-wrap').smoothproducts();
 });
 
+// load comments
+$(document).ready(function () {
+    let productId = $('#published-comments').attr('data-product-id');
+    fetchComments(productId, 1);
+});
+
 function gotoComments() {
     $('#product-comments a').tab('show');
     $('html, body').animate({
@@ -41,7 +47,7 @@ function fetchComments(productId, pageNumber) {
     $.get({
         url: '/Catalog/Product/' + productId + '/comments/' + pageNumber,
         success: function (data) {
-            $('.product-comment-content').html(data);
+            $('#published-comments').html(data);
 
             if ($('.product-rating-input').attr('data-rating-value') != 0) {
                 $('.product-rating-input').hide();
@@ -66,7 +72,6 @@ $(document).ready(
             NotifyWhenAvailable(productId, email, "Add");
             $('#product-notification-modal').modal('hide');
         });
-
 
         // product availability notification
         $(document).on('click', '#product-inform-available', function () {
@@ -167,7 +172,7 @@ $(document).ready(
                     success: function () {
 
                         $('#product-comment-text').val('');
-                        $('#comment-area').html('<span class="text-success">Thank you for your comment!</span>');
+                        $('#comment-area').html('<span class="text-success">Thank you for your comment!</span><span class="text-success d-block">It will be published after validaiton.</span>');
 
                         fetchComments(productId, 1);
 

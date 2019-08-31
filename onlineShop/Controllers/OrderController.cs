@@ -239,7 +239,7 @@ namespace onlineShop.Controllers
                 var changeLogs = _auditTrailService.RetrieveAndLogChanges();
 
                 foreach (var changeLog in changeLogs)
-                    order.ChangeHistory.Add(new OrderChangeLog { ChangeLog = changeLog, Order = order });
+                    orderInDb.ChangeHistory.Add(new OrderChangeLog { ChangeLog = changeLog, Order = order });
 
                 // update entity state change info
                 orderInDb.LastModifiedOn = DateTime.UtcNow;

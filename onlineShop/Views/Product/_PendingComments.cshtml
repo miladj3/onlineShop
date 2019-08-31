@@ -1,0 +1,68 @@
+﻿@model PaginatedList<ProductComment>
+
+@if (Model.Count == 0)
+{
+    <span class="text-secondary mb-3">No pending comments in queue.</span>
+}
+else
+{
+    @foreach (var comment in Model)
+    {
+        <div class="wrapper flex-grow-1  bb-1 mb-3">
+            <div class="wrapper flex-grow-1">
+                <div class="d-flex flex-1"><span class="text-secondary mr-1">ID:</span>@comment.Id</div>
+                <div class="d-flex flex-1 justify-content-center">@comment.DateAdded.ToLocalTime()</div>
+
+                <div class="d-flex flex-1 justify-content-end">
+                    <a href="javascript:;" class="ctrl-comment text-success" data-comment-id="@comment.Id" data-action="publish">Publish</a>
+                    <div class="text-secondary ml-1 mr-1">|</div>
+                    <a href="javascript:;" class="ctrl-comment text-danger" data-comment-id="@comment.Id" data-action="delete">Delete</a>
+                </div>
+
+                <div class="d-flex flex-basis-100">
+                    <span class="text-secondary mr-1">Posted By:</span>
+                    @if (comment.Customer != null)
+                    {
+                        <a asp-action="ViewEdit" asp-controller="User" asp-userId="@comment.CustomerId" class="link-alt">@comment.Customer.Firstname (@comment.Customer.Email)</a>
+                    }
+                    else
+                    {
+                        @comment.GuestUserName
+                    }
+                </div>
+
+                <div class="d-flex flex-basis-100">
+                    <span class="text-secondary mr-1">Product:</span>
+                    <a asp-action="Display" asp-controller="Product" asp-route-id="@comment.ProductId" class="link-alt ml-1">
+                        @comment.Product.Name.SetLengthLimit(50)
+                    </a>
+                </div>
+
+                @if (comment.RatingValue > 0)
+                {
+
+                    <div class="d-flex flex-basis-100">
+                        <span class="text-secondary mr-1">Rating:</span>
+
+                        <div>
+                            @for (var i = 1; i <= comment.RatingValue; i++)
+                            {
+                                <i class="fa fa-star fa-star-active fs12"></i>
+                            }
+                        </div>
+                    </div>
+                }
+
+                <div class="d-flex flex-basis-100">@comment.Text</div>
+
+            </div>
+        </div>
+    }
+
+    <div class="mb-3">
+        @await Html.PartialAsync("_CommentPagination", Model)
+    </div>
+
+}
+
+

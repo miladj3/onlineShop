@@ -84,28 +84,29 @@ namespace onlineShop.ViewModels
         public bool IsWatchedByUser { get; set; }
         public bool NoUserAccount { get; set; }
 
-
         public double RatingOverall
         {
             get
             {
-                return Math.Round((this.Comments.Sum(r => r.RatingValue) / (float)this.Comments.Where(c => c.RatingValue != 0).Count()), 2);
+                return Math.Round((this.Comments.Where(c => c.IsPublished).Sum(r => r.RatingValue) / (float)this.Comments.Where(c => c.RatingValue != 0 && c.IsPublished).Count()), 2);
             }
         }
         public bool IsRated
         {
             get
             {
-                return (this.Comments.Where(c => c.RatingValue != 0).Count() > 0);
+                return (this.Comments.Where(c => c.RatingValue != 0 && c.IsPublished).Count() > 0);
             }
         }
         public int RatingCount
         {
             get
             {
-                return (this.Comments.Where(c => c.RatingValue != 0).Count());
+                return (this.Comments.Where(c => c.RatingValue != 0 && c.IsPublished).Count());
             }
         }
+
+        public int PublishedCommentsCount { get { return this.Comments.Where(c => c.IsPublished).Count(); } }
 
     }
 }

@@ -16,7 +16,6 @@ namespace onlineShop.ViewModels
         public double priceLimitMin { get; set; }
         public double priceLimitMax { get; set; }
 
-
         public PaginatedList<Product> ProductList { get; set; }
 
         public static object GenerateNavLinksWithFilters(int pages, string subCatId, ProductQuery productQuery)

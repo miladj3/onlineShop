@@ -19,5 +19,6 @@ namespace onlineShop.Models
         public bool IsVerifiedPurchase { get; set; }
 
         public bool IsPostedByGuest { get { return this.Customer == null; } }
+        public bool IsPublished { get; set; }
     }
 }
