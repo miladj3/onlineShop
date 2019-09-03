@@ -11,7 +11,7 @@
     <!-- 'src_name' - desired display name in the call to BreadcrumbBuilder  -->
     <!-- 'src_route_id' - name of route identifier supplied in the call to BreadcrumbBuilder  -->
 
-    <node name="AllBlogs" action="Index" controller="Blog" route_id_name="" default_name="All Blogs" src_name="" src_route_id="">
+    <node name="News and Blogs" action="Index" controller="Blog" route_id_name="" default_name="All Blogs" src_name="" src_route_id="">
       <node name="BlogDisplay" action="Display" controller="Blog" route_id_name="id" default_name="" src_name="blogTitle" src_route_id="blogId"></node>
     </node>
     

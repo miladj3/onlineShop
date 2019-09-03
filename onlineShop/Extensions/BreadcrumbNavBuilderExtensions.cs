@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using onlineShop.Extensions.BreadcrumbNavBuilderData;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace onlineShop.Extensions
 {
@@ -11,7 +12,8 @@ namespace onlineShop.Extensions
     {
         public static IHtmlContent BreadcrumbNavRender(this IHtmlHelper helper)
         {
-            string markup = "<ol class='breadcrumb'>";
+            var sb = new StringBuilder();
+            sb.Append("<ol class='breadcrumb'>");
 
             try
             {
@@ -20,12 +22,12 @@ namespace onlineShop.Extensions
                 foreach (var item in deserializedModel)
                 {
                     var displayStyle = item.IsActive ? "active" : "";
-                    markup += $"<li class='breadcrumb-item {displayStyle}'><a href='{item.ItemUrl}'>{item.ItemDisplayName}</a></li>";
+                    sb.Append($"<li class='breadcrumb-item {displayStyle}'><a href='{item.ItemUrl}'>{item.ItemDisplayName}</a></li>");
                 }
 
-                markup += "</ol>";
+                sb.Append("</ol>");
 
-                return new HtmlString(markup);
+                return new HtmlString(sb.ToString());
             }
             catch (Exception ex)
             {

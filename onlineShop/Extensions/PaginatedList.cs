@@ -25,14 +25,6 @@ namespace onlineShop.Extensions
             this.AddRange(items);
         }
 
-        public static PaginatedList<T> CreateFromList(List<T> source, int pageIndex, int pageSize)
-        {
-            var count = source.Count();
-            var items = source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
-
-            return new PaginatedList<T>(items, count, pageIndex, pageSize, count);
-        }
-
         public static async Task<PaginatedList<T>> CreateAsync(IQueryable<T> source, int pageIndex, int pageSize)
         {
             var count = await source.CountAsync();

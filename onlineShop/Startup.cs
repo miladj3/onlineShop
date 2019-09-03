@@ -16,12 +16,13 @@ using onlineShop.Contracts;
 using onlineShop.Repositories;
 using Microsoft.AspNetCore.Http;
 using onlineShop.Filters;
+using Microsoft.Extensions.Logging;
 
 namespace onlineShop
 {
     public class Startup
     {
-        public IConfiguration _configuration { get; set;  }
+        public readonly IConfiguration _configuration;
 
         public Startup(IConfiguration configuration)
         {
