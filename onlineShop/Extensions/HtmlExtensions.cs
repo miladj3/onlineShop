@@ -10,6 +10,7 @@ namespace onlineShop.Extensions
     {
         public static HtmlString EnumDisplayNameFor(this Enum item)
         {
+            // original source: https://github.com/Maetiz/mvc-extensions/blob/master/HtmlExtensions.cs
             var type = item.GetType();
             var member = type.GetMember(item.ToString());
 

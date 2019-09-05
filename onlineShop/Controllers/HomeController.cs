@@ -1,6 +1,5 @@
 ﻿using Extensions;
 using Microsoft.AspNetCore.Mvc;
-using onlineShop.Filters;
 using onlineShop.Repositories;
 using onlineShop.ViewModels;
 using System.Linq;

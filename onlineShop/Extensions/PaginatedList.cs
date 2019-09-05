@@ -8,6 +8,9 @@ namespace onlineShop.Extensions
 {
     public class PaginatedList<T> : List<T>
     {
+        // Source (with own modifications):
+        // https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/sort-filter-page?view=aspnetcore-2.2 
+
         public int PageIndex { get; set; }
         public int TotalPages { get; set; }
         public bool HasPreviousPage { get => this.PageIndex > 1; }

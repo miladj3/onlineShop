@@ -80,8 +80,6 @@ namespace onlineShop.Controllers
             var publishedCommentsPaginated = await PaginatedList<ProductComment>.CreateAsync(publishedComments, pages, commentsPerPage);
 
             return PartialView("_PublishedComments", publishedCommentsPaginated);
-
-            //return ViewComponent("ProductComments", new { allComments = comments, pages = pages });
         }
 
         [HttpGet("/Catalog/Product/{id}/RatingSummary/")]
@@ -111,12 +109,7 @@ namespace onlineShop.Controllers
         [HttpGet("ControlPanel/PendingComments/")]
         public IActionResult ManagePendingComments()
         {
-            //var comments = _productRepository.FetchProductCommentsAllPending();
-            //var commentsPaginated = await PaginatedList<ProductComment>.CreateAsync(comments, pages, commentsPerPage);
-
             _breadcrumbNavBuilder.CreateForNode("CPanelPendingCommentsView", new { }, this);
-
-            //return View(commentsPaginated);
             return View();
         }
 
@@ -209,8 +202,6 @@ namespace onlineShop.Controllers
 
                 foreach (var changeLog in changeLogs)
                     product.ChangeHistory.Add(new ProductChangeLog { ChangeLog = changeLog, Product = product });
-
-                //_productRepository.ArchieveChangeLogs(product, admin);
 
                 product.LastModifiedOn = DateTime.UtcNow;
                 product.LastModifiedById = admin.Id;

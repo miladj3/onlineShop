@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Newtonsoft.Json;
 using onlineShop.Contracts;
-using onlineShop.Extensions.BreadcrumbNavBuilderData;
+using onlineShop.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -15,8 +15,8 @@ namespace onlineShop.Services
 {
     public class BreadcrumbNavBuilder : IBreadcrumbNavBuilder
     {
-
         private const string bnbMapPath = "/breadcrumb_sitemap.xml";
+
         private readonly IHostingEnvironment _env;
 
         public BreadcrumbNavBuilder(IHostingEnvironment env)
@@ -26,22 +26,22 @@ namespace onlineShop.Services
 
         public void CreateForNode(string currentNodeName, object BNBData, Controller controller)
         {
-            var breadcrumbItemList = new List<BreadcrumbItem>();
-
-            var controllerContext = controller.ControllerContext;
+            var breadcrumbItemList = new List<BreadcrumbNavItem>();
 
             var path = _env.ContentRootPath + bnbMapPath;
 
+            // read sitemap
             XDocument xmlDoc = XDocument.Load(path);
             XElement element = xmlDoc.Descendants("node").FirstOrDefault(n => n.Attribute("name").Value == currentNodeName);
 
             if (element != null)
             {
+                // get current node and all its ancestors
                 var nodeTree = element.AncestorsAndSelf().Where(n => n.Name == "node").ToList();
 
                 foreach (var node in nodeTree)
                 {
-                    // get data from map
+                    // extract each node data from sitemap
                     var nodeName = node.Attribute("name").Value;
                     var actionName = node.Attribute("action").Value;
                     var controllerName = node.Attribute("controller").Value;
@@ -50,23 +50,22 @@ namespace onlineShop.Services
                     var defaultName = node.Attribute("default_name").Value;
                     var routeIdPropName = node.Attribute("route_id_name").Value;
 
-                    // try to extract value for routeId and name to displayed
-                    var routeIdValue = ExtractPropertyValue(srcRouteId, BNBData);
-                    var extractedName = ExtractPropertyValue(srcName, BNBData);
-
+                    // try to extract value for route id and name to be displayed
+                    var routeIdValue = TryExtractPropertyValue(srcRouteId, BNBData);
+                    var extractedName = TryExtractPropertyValue(srcName, BNBData);
                     var itemName = String.IsNullOrEmpty(extractedName) ? defaultName : extractedName;
 
-                    //generate path
+                    // use expando object to collect route parameters
                     dynamic exp = new ExpandoObject();
                     var expDict = exp as IDictionary<String, object>;
-
                     expDict.Add(routeIdPropName, routeIdValue);
 
-                    var uh = new UrlHelper(controllerContext);
+                    // generate absolute path
+                    var uh = new UrlHelper(controller.ControllerContext);
                     var itemPath = uh.Action(actionName, controllerName, (object)exp);
 
-                    //append to the list of BNB items
-                    breadcrumbItemList.Add(new BreadcrumbItem()
+                    // append to the list of breadcrumb navigation items
+                    breadcrumbItemList.Add(new BreadcrumbNavItem()
                     {
                         IsActive = String.Equals(nodeName, currentNodeName),
                         ItemDisplayName = itemName,
@@ -77,12 +76,12 @@ namespace onlineShop.Services
 
             breadcrumbItemList.Reverse();
 
+            // serialized and send to tempdata
             var breadcrumbItemListSerialized = JsonConvert.SerializeObject(breadcrumbItemList);
-
             controller.TempData["BNBData"] = breadcrumbItemListSerialized;
         }
 
-        private string ExtractPropertyValue(string propertyName, object obj)
+        private string TryExtractPropertyValue(string propertyName, object obj)
         {
             try
             {

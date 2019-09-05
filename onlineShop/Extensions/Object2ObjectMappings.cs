@@ -69,8 +69,6 @@ namespace onlineShop.Extensions
         {
             // set delivery method
             detailsDTO.DeliveryMethodType = order.DeliveryDetails.DeliveryMethodType;
-
-            // set payment method
             detailsDTO.PaymentMethod = order.PaymentMethod;
 
             // set common details
@@ -221,9 +219,7 @@ namespace onlineShop.Extensions
             orderDto.LastModifiedByName = (order.LastModifiedBy == null) ? null : (order.LastModifiedBy.UserName);
             orderDto.Status = order.Status;
             orderDto.ChangeHistory = order.ChangeHistory;
-            //orderDto.OrderAmount = order.OrderAmount;
             orderDto.DeliveryFee = order.DeliveryFee;
-            //orderDto.OrderAmountTotal = order.OrderAmountTotal;
         }
     }
 }
