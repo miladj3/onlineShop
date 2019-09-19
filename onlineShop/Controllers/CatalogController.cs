@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using onlineShop.Contracts;
 using onlineShop.Extensions;
 using onlineShop.Models;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace onlineShop.Controllers
 {
-    public class CatalogController : Controller
+    public partial class CatalogController : Controller
     {
         private readonly IBreadcrumbNavBuilder _breadcrumbNavBuilder;
         private readonly IDepartmentRepository _departmentRepository;
@@ -99,18 +98,6 @@ namespace onlineShop.Controllers
             ViewData["CurrentSearch"] = productQuery.SearchString;
 
             return View(vm);
-        }
-
-        // ---------------------------------- ADMIN PANEL
-
-        [Authorize(Roles = "Admin, Manager")]
-        [HttpGet("/ControlPanel/Catalog/")]
-        public IActionResult ManageCatalog()
-        {
-            var departmentList = _departmentRepository.GetAllDepartments();
-
-            _breadcrumbNavBuilder.CreateForNode("CPanelCatalogView", new { }, this);
-            return View(departmentList);
         }
     }
 }

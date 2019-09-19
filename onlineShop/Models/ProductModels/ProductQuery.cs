@@ -14,8 +14,8 @@ namespace onlineShop.Models
 
     public enum OrderDirection
     {
-        Asc = 0,
-        Desc = 1
+        Desc = 0,
+        Asc = 1
     }
 
     public class ProductQuery
